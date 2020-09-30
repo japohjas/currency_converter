@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+    <title>valuutamuunnin</title>
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="app.js"></script>
+</head>
+
+<body>
+
+    <div class="posti">
+        <a href="mailto:japohjas@gmail.com?subject=Feedback: valuuttamuunnin">feedback</a>
+    </div>
+    <div>
+        <p class="otsikko">Currency converter</p>
+        <p>"The Frankfurter API tracks foreign exchange references rates 
+            published by the European Central Bank. 
+            The data refreshes around 16:00 CET every working day."<p>
+        <p id="paivitetty"></p>
+    </div>    
+    <div>
+        <select id="maavalinta"></select>
+    </div>
+    <div>
+        <input type="number" id="syote" value="1"></input>
+        <button id="nappiMuunna">==</button>
+    </div>    
+    <div class="notranslate">
+        <table class='tulostus'>
+            <tr>
+            <td id='solu1'></td><td id='solu2'>=</td><td id='solu3'></td>
+            </tr>
+            <tr>
+            <td id='solu4'></td><td id='solu5'>=</td><td id='solu6'></td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+</html>
