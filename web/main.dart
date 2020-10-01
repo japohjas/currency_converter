@@ -50,6 +50,13 @@ void muunna(data) {
   InputElement input = querySelector('#syote');
 
   var syote = double.parse(input.value);
+
+  if (syote < 0 || syote > 9999999999.99) {
+    syote = 0;
+    input.style.backgroundColor = 'red';
+    Future.delayed(Duration(seconds: 1), valmis);
+  }
+
   var tulosKerto = syote * muuntokerroin * 1.0;
   var tulosJako = syote / muuntokerroin * 1.0;
 
@@ -57,6 +64,12 @@ void muunna(data) {
   querySelector('#solu3').text = '${format(tulosKerto, syote)} $valuutta';
   querySelector('#solu4').text = '${format(syote, syote)} $valuutta';
   querySelector('#solu6').text = '${format(tulosJako, syote)} EUR';
+}
+
+void valmis() {
+  InputElement input = querySelector('#syote');
+  input.style.backgroundColor = 'rgb(186, 243, 243)';
+  input.value = '0';
 }
 
 String format(muotoiltava, luku) {
