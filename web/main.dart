@@ -35,7 +35,7 @@ void kaynnista() async {
     elementti.defaultSelected = elementti.value == 'SEK';
   }
 
-  await muunna(dataKurssit);
+  muunna(dataKurssit);
 
   querySelector('#nappiMuunna').onClick.listen((e) {
     muunna(dataKurssit);
