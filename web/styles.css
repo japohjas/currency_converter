@@ -11,16 +11,16 @@ html, body {
   color: lightgray;
 }
 
-.posti {
-  margin-top: 0.4rem;
-  margin-left: 0.6rem;
-  text-align: left;
-  font-style: italic;
+.paivamaara {
+  font-size: 0.9rem;
+  text-align: right;
+  margin-right: 1.3rem;
 }
 
 .otsikko {
   font-size: 1.5rem;
   font-weight: bold;
+  margin-top: 0%;
 }
 
 #maavalinta { 
@@ -75,16 +75,4 @@ html, body {
 #solu3, #solu6 {
   text-align: left;
   padding: 0.5rem;
-}
-
-a:link {
-  color: dimgrey;
-  background-color: transparent;
-  text-decoration: none;
-}
-
-a:hover {
-  color: darkturquoise;
-  background-color: transparent;
-  text-decoration: underline;
 }

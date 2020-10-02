@@ -6,6 +6,7 @@ import 'package:intl/intl.dart'; // päivämäärä
 // https://pub.dev/packages/intl
 // https://stackoverflow.com/questions/16126579/how-do-i-format-a-date-with-dart
 // https://pub.dev/documentation/intl/latest/intl/NumberFormat-class.html
+// https://dart.dev/codelabs/async-await      // Future.delayed
 // 29.9.2020 Jari Pohjasmäki japohjas@gmail.com
 
 void main() {
@@ -13,6 +14,8 @@ void main() {
 }
 
 void kaynnista() async {
+  haePaivamaara();
+
   var sisaltoKurssit =
       await HttpRequest.getString('https://api.frankfurter.app/latest');
   var dataKurssit = jsonDecode(sisaltoKurssit);
@@ -42,19 +45,30 @@ void kaynnista() async {
   });
 }
 
-void muunna(data) {
+void haePaivamaara() {
+  var now = DateTime.now();
+  var formatter = DateFormat('EEEE, dd.MM.yyyy');
+  var formatted = formatter.format(now);
+  querySelector('#date').text = formatted;
+}
+
+void muunna(data) async {
   SelectElement kohdemaa = querySelector('#maavalinta');
   var valuutta = kohdemaa.value;
   var muuntokerroin = data['rates'][valuutta];
 
   InputElement input = querySelector('#syote');
-
   var syote = double.parse(input.value);
 
-  if (syote < 0 || syote > 9999999999.99) {
-    syote = 0;
+  if (syote < 0 || syote > 99999999999.99) {
     input.style.backgroundColor = 'red';
-    Future.delayed(Duration(seconds: 1), valmis);
+    await Future.delayed(
+        Duration(milliseconds: 600),
+        () => {
+              input.style.backgroundColor = 'rgb(186, 243, 243)',
+              input.value = '1',
+              syote = 1
+            });
   }
 
   var tulosKerto = syote * muuntokerroin * 1.0;
@@ -64,12 +78,6 @@ void muunna(data) {
   querySelector('#solu3').text = '${format(tulosKerto, syote)} $valuutta';
   querySelector('#solu4').text = '${format(syote, syote)} $valuutta';
   querySelector('#solu6').text = '${format(tulosJako, syote)} EUR';
-}
-
-void valmis() {
-  InputElement input = querySelector('#syote');
-  input.style.backgroundColor = 'rgb(186, 243, 243)';
-  input.value = '0';
 }
 
 String format(muotoiltava, luku) {
