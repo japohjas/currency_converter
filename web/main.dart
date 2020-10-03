@@ -55,6 +55,10 @@ void haePaivamaara() {
 }
 
 String poistaEtunolla(String mjono) {
+  if (mjono.isEmpty) {
+    return '';
+  }
+
   mjono = mjono.trim();
   if (int.parse(mjono[0]) == 0 && mjono.length == 2) {
     return mjono[1].toString();
@@ -69,7 +73,13 @@ void muunna(data) async {
   var muuntokerroin = data['rates'][valuutta];
 
   InputElement input = querySelector('#syote');
-  var syote = double.parse(input.value);
+  var syote = 0.0;
+
+  if (input.value.isEmpty) {
+    syote = -1.0;
+  } else {
+    syote = double.parse(input.value);
+  }
 
   if (syote < 0 || syote > 99999999999.99) {
     input.style.backgroundColor = 'red';
@@ -78,7 +88,7 @@ void muunna(data) async {
         () => {
               input.style.backgroundColor = 'rgb(186, 243, 243)',
               input.value = '1',
-              syote = 1
+              syote = 1.0
             });
   }
 
