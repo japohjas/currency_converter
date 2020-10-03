@@ -27,10 +27,10 @@ void kaynnista() async {
 
   var datePalat = dataKurssit['date'].split('-');
   // print(datePalat);
-  var paivi = poistaEtunolla(datePalat[2]);
+  var paiva = poistaEtunolla(datePalat[2]);
   var kk = poistaEtunolla(datePalat[1]);
   var vuosi = datePalat[0];
-  querySelector('#paivitetty').text = 'Refreshed: $paivi.$kk.$vuosi';
+  querySelector('#paivitetty').text = 'Refreshed: $paiva.$kk.$vuosi';
 
   for (var maakoodi in maalista) {
     OptionElement elementti = Element.option();
