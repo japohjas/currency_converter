@@ -27,8 +27,10 @@ void kaynnista() async {
 
   var datePalat = dataKurssit['date'].split('-');
   // print(datePalat);
-  querySelector('#paivitetty').text =
-      'Refreshed: ${datePalat[2]}.${datePalat[1]}.${datePalat[0]}';
+  var paivi = poistaEtunolla(datePalat[2]);
+  var kk = poistaEtunolla(datePalat[1]);
+  var vuosi = datePalat[0];
+  querySelector('#paivitetty').text = 'Refreshed: $paivi.$kk.$vuosi';
 
   for (var maakoodi in maalista) {
     OptionElement elementti = Element.option();
@@ -47,9 +49,18 @@ void kaynnista() async {
 
 void haePaivamaara() {
   var now = DateTime.now();
-  var formatter = DateFormat('EEEE, dd.MM.yyyy');
+  var formatter = DateFormat('EEEE, d.M.yyyy');
   var formatted = formatter.format(now);
   querySelector('#date').text = formatted;
+}
+
+String poistaEtunolla(String mjono) {
+  mjono = mjono.trim();
+  if (int.parse(mjono[0]) == 0 && mjono.length == 2) {
+    return mjono[1].toString();
+  }
+
+  return mjono;
 }
 
 void muunna(data) async {
