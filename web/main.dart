@@ -82,35 +82,31 @@ void muunna(data) async {
   }
 
   if (syote < 0 || syote > 99999999999.99) {
-    input.style.backgroundColor = 'red';
-    await Future.delayed(
-        Duration(milliseconds: 600),
-        () => {
-              input.style.backgroundColor = 'rgb(186, 243, 243)',
-              input.value = '1',
-              syote = 1.0
-            });
+    input.style.color = 'red';
+    await Future.delayed(Duration(milliseconds: 600),
+        () => {input.style.color = 'black', input.value = '1', syote = 1.0});
   }
 
   var tulosKerto = syote * muuntokerroin * 1.0;
   var tulosJako = syote / muuntokerroin * 1.0;
+  var tarkka = syote == 1;
 
-  querySelector('#solu1').text = '${format(syote, syote)} EUR';
-  querySelector('#solu3').text = '${format(tulosKerto, syote)} $valuutta';
-  querySelector('#solu4').text = '${format(syote, syote)} $valuutta';
-  querySelector('#solu6').text = '${format(tulosJako, syote)} EUR';
+  querySelector('#solu1').text = '${format(syote, tarkka)} EUR';
+  querySelector('#solu3').text = '${format(tulosKerto, tarkka)} $valuutta';
+  querySelector('#solu4').text = '${format(syote, tarkka)} $valuutta';
+  querySelector('#solu6').text = '${format(tulosJako, tarkka)} EUR';
 }
 
-String format(muotoiltava, luku) {
-  if (luku == 1) {
+String format(double luku, bool tarkkaArvo) {
+  if (tarkkaArvo) {
     var f = NumberFormat('##0.00###', 'en_US');
-    var u = f.format(muotoiltava);
+    var u = f.format(luku);
     var palat = u.split('.');
     return '${palat[0]},${palat[1]}';
   }
 
   var f = NumberFormat('#,##0.00', 'en_US');
-  var u = f.format(muotoiltava);
+  var u = f.format(luku);
   var palat = u.split('.');
   var palat2 = palat[0].split(',');
 

@@ -2030,42 +2030,39 @@ if(0>=t)return H.k(a,0)
 if(P.iP(a[0])===0&&t===2){if(1>=t)return H.k(a,1)
 return a[1]}return a},
 cy:function(a){return F.iX(a)},
-iX:function(a){var t=0,s=P.fq(u.z),r,q,p,o,n,m,l,k,j
+iX:function(a){var t=0,s=P.fq(u.z),r,q,p,o,n,m,l,k
 var $async$cy=P.fu(function(b,c){if(b===1)return P.fj(c,s)
-while(true)switch(t){case 0:n={}
-m=document
-l=u.ak.a(m.querySelector("#maavalinta")).value
-k=J.cz(J.cz(a,"rates"),l)
-j=u.W.a(m.querySelector("#syote"))
-n.a=0
-q=j.value
-q=q.length===0?n.a=-1:n.a=P.iH(q)
+while(true)switch(t){case 0:o={}
+n=document
+m=u.ak.a(n.querySelector("#maavalinta")).value
+l=J.cz(J.cz(a,"rates"),m)
+k=u.W.a(n.querySelector("#syote"))
+o.a=0
+q=k.value
+q=q.length===0?o.a=-1:o.a=P.iH(q)
 if(typeof q!=="number"){r=q.al()
 t=1
 break}t=q<0||q>99999999999.99?3:4
 break
-case 3:q=j.style
-q.backgroundColor="red"
+case 3:q=k.style
+q.color="red"
 t=5
-return P.el(P.hm(new P.aB(6e5),new F.dY(n,j),u.U),$async$cy)
-case 5:case 4:q=n.a
-H.i3(k)
+return P.el(P.hm(new P.aB(6e5),new F.dY(o,k),u.U),$async$cy)
+case 5:case 4:q=o.a
+H.i3(l)
 if(typeof q!=="number"){r=q.P()
 t=1
-break}if(typeof k!=="number"){r=H.ay(k)
+break}if(typeof l!=="number"){r=H.ay(l)
 t=1
-break}p=m.querySelector("#solu1")
-o=n.a
-J.aS(p,F.dO(o,o)+" EUR")
-J.aS(m.querySelector("#solu3"),F.dO(q*k,n.a)+" "+H.f(l))
-o=m.querySelector("#solu4")
-p=n.a
-J.aS(o,F.dO(p,p)+" "+H.f(l))
-J.aS(m.querySelector("#solu6"),F.dO(q/k,n.a)+" EUR")
+break}p=q===1
+J.aS(n.querySelector("#solu1"),F.dO(o.a,p)+" EUR")
+J.aS(n.querySelector("#solu3"),F.dO(q*l,p)+" "+H.f(m))
+J.aS(n.querySelector("#solu4"),F.dO(o.a,p)+" "+H.f(m))
+J.aS(n.querySelector("#solu6"),F.dO(q/l,p)+" EUR")
 case 1:return P.fk(r,s)}})
 return P.fl($async$cy,s)},
 dO:function(a,b){var t,s,r,q,p,o
-if(b===1){t=T.eU("##0.00###","en_US").H(a).split(".")
+if(b){t=T.eU("##0.00###","en_US").H(a).split(".")
 s=t.length
 if(0>=s)return H.k(t,0)
 r=H.f(t[0])+","
@@ -3606,11 +3603,11 @@ $1:function(a){u.bE.a(a)
 F.cy(this.a)},
 $S:27}
 F.dY.prototype={
-$0:function(){var t="rgb(186, 243, 243)",s=this.b,r=s.style
-r.backgroundColor=t
-C.C.sbJ(s,"1")
+$0:function(){var t=this.b,s=t.style
+s.color="black"
+C.C.sbJ(t,"1")
 this.a.a=1
-return P.hu([t,"1",1],u._)},
+return P.hu(["black","1",1],u._)},
 $S:28};(function aliases(){var t=J.F.prototype
 t.aV=t.i
 t=J.aa.prototype

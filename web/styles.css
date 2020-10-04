@@ -29,6 +29,10 @@ html, body {
   margin: 1.2rem;
 }
 
+#maavalinta:hover {
+  background-color: white;
+}
+
 #syote {
   font-size: 1.2rem;
   width: 8rem;
@@ -38,11 +42,14 @@ html, body {
   background-color: rgb(186, 243, 243);
 }
 
+#syote:hover {
+  background-color: white;
+}
+
 #nappiMuunna {
   width: 3rem;
   background-color: rgb(186, 243, 243);
   padding: 0.2rem;
-  width: 3rem;
 }
 
 #nappiMuunna:hover {
