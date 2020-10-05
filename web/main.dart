@@ -71,6 +71,7 @@ void muunna(data) async {
   SelectElement kohdemaa = querySelector('#maavalinta');
   var valuutta = kohdemaa.value;
   var muuntokerroin = data['rates'][valuutta];
+  var perusvaluutta = data['base'];
 
   InputElement input = querySelector('#syote');
   var syote = 0.0;
@@ -91,10 +92,10 @@ void muunna(data) async {
   var tulosJako = syote / muuntokerroin * 1.0;
   var tarkka = syote == 1;
 
-  querySelector('#solu1').text = '${format(syote, tarkka)} EUR';
+  querySelector('#solu1').text = '${format(syote, tarkka)} $perusvaluutta';
   querySelector('#solu3').text = '${format(tulosKerto, tarkka)} $valuutta';
   querySelector('#solu4').text = '${format(syote, tarkka)} $valuutta';
-  querySelector('#solu6').text = '${format(tulosJako, tarkka)} EUR';
+  querySelector('#solu6').text = '${format(tulosJako, tarkka)} $perusvaluutta';
 }
 
 String format(double luku, bool tarkkaArvo) {
