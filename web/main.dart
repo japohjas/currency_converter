@@ -19,7 +19,8 @@ void kaynnista() async {
   var sisaltoKurssit =
       await HttpRequest.getString('https://api.frankfurter.app/latest');
   var dataKurssit = jsonDecode(sisaltoKurssit);
-  var maalista = dataKurssit['rates'].keys;
+  var maalista = dataKurssit['rates'].keys.toList(); // toList()
+  // print(maalista);
 
   var sisaltoMaat =
       await HttpRequest.getString('https://api.frankfurter.app/currencies');
