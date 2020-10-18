@@ -38,7 +38,7 @@ void kaynnista() async {
   var paiva = poistaEtunolla(datePalat[2]);
   var kk = poistaEtunolla(datePalat[1]);
   var vuosi = datePalat[0];
-  querySelector('#paivitetty').text = 'Refreshed: $paiva.$kk.$vuosi';
+  querySelector('#paivitetty').text = 'Updated: $paiva.$kk.$vuosi';
 
   for (var maakoodi in maalista) {
     OptionElement elementti = Element.option();
@@ -76,12 +76,11 @@ void haePaivamaara() {
 }
 
 void naytaInfoTexti() {
-  var infoText = '''The foreign exchange references rates published by 
-      the European Central Bank. 
-      The data refreshes around 16:00 CET every working day.''';
+  var infoText = '''This app tracks the exchange rates published by the 
+  European Central Bank through the Frankfurter API.
+  The data is updated around 16:00 CET every working day.''';
 
   querySelector('#info').text = infoText;
-  print('This app built with Frankfurter API, by japohjas@gmail.com');
 }
 
 String poistaEtunolla(String mjono) {
