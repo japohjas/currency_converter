@@ -76,10 +76,9 @@ String paivamaara() {
 }
 
 String infoteksti() {
-  var teksti = '''This app tracks the exchange rates published by the 
+  return '''This app tracks the exchange rates published by the 
   European Central Bank through the Frankfurter API.
-  The data is updated around 16:00 CET every working day.''';
-  return teksti;
+  The data will be updated around 16:00 CET every working day.''';
 }
 
 String poistaEtunolla(String mjono) {
