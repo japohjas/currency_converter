@@ -20,7 +20,7 @@ copyProperties(a.prototype,t)
 a.prototype=t}}function inheritMany(a,b){for(var t=0;t<b.length;t++)inherit(b[t],a)}function mixin(a,b){copyProperties(b.prototype,a.prototype)
 a.prototype.constructor=a}function lazyOld(a,b,c,d){var t=a
 a[b]=t
-a[c]=function(){a[c]=function(){H.j3(b)}
+a[c]=function(){a[c]=function(){H.j2(b)}
 var s
 var r=d
 try{if(a[b]===t){s=a[b]=r
@@ -173,11 +173,11 @@ b:function(a){var t,s
 if(a==null)a=new P.bV()
 t=new Error()
 t.dartException=a
-s=H.j4
+s=H.j3
 if("defineProperty" in Object){Object.defineProperty(t,"message",{get:s})
 t.name=""}else t.toString=s
 return t},
-j4:function(){return J.bC(this.dartException)},
+j3:function(){return J.bC(this.dartException)},
 aA:function(a){throw H.b(a)},
 e0:function(a){throw H.b(P.aW(a))},
 a3:function(a){var t,s,r,q,p,o
@@ -356,9 +356,9 @@ if(q[r]===a)return r}throw H.b(P.cC("Field name "+a+" not found."))},
 cu:function(a){if(a==null)H.iC("boolean expression must not be null")
 return a},
 iC:function(a){throw H.b(new H.ca(a))},
-j3:function(a){throw H.b(new P.bI(a))},
+j2:function(a){throw H.b(new P.bI(a))},
 iM:function(a){return v.getIsolateTag(a)},
-jR:function(a,b,c){Object.defineProperty(a,b,{value:c,enumerable:false,writable:true,configurable:true})},
+jQ:function(a,b,c){Object.defineProperty(a,b,{value:c,enumerable:false,writable:true,configurable:true})},
 iX:function(a){var t,s,r,q,p,o=H.Z($.fC.$1(a)),n=$.dP[o]
 if(n!=null){Object.defineProperty(a,v.dispatchPropertyName,{value:n,enumerable:false,writable:true,configurable:true})
 return n.i}t=$.dV[o]
@@ -433,12 +433,12 @@ return a},
 fK:function(a){if(/[[\]{}()*+?.\\^$|]/.test(a))return a.replace(/[[\]{}()*+?.\\^$|]/g,"\\$&")
 return a},
 fL:function(a,b,c){var t
-if(typeof b=="string")return H.j2(a,b,c)
+if(typeof b=="string")return H.j1(a,b,c)
 if(b instanceof H.b5){t=b.gbb()
 t.lastIndex=0
 return a.replace(t,H.fz(c))}if(b==null)H.aA(H.R(b))
 throw H.b("String.replaceAll(Pattern) UNIMPLEMENTED")},
-j2:function(a,b,c){var t,s,r,q
+j1:function(a,b,c){var t,s,r,q
 if(b===""){if(a==="")return c
 t=a.length
 for(s=c,r=0;r<t;++r)s=s+a[r]+c
@@ -650,7 +650,7 @@ return this.z.b(a)},
 il:function(a){var t=this,s=t.r
 if(a instanceof P.k)return!!a[s]
 return!!J.bA(a)[s]},
-jP:function(a){var t=this
+jO:function(a){var t=this
 if(a==null)return a
 else if(t.b(a))return a
 H.fo(a,t)},
@@ -668,45 +668,45 @@ i5:function(a){return a},
 im:function(a){return!0},
 i7:function(a){return a},
 fq:function(a){return!0===a||!1===a},
-jD:function(a){if(!0===a)return!0
+jC:function(a){if(!0===a)return!0
 if(!1===a)return!1
-throw H.b(H.D(a,"bool"))},
-jF:function(a){if(!0===a)return!0
-if(!1===a)return!1
-if(a==null)return a
 throw H.b(H.D(a,"bool"))},
 jE:function(a){if(!0===a)return!0
 if(!1===a)return!1
 if(a==null)return a
-throw H.b(H.D(a,"bool?"))},
-jG:function(a){if(typeof a=="number")return a
-throw H.b(H.D(a,"double"))},
-jI:function(a){if(typeof a=="number")return a
+throw H.b(H.D(a,"bool"))},
+jD:function(a){if(!0===a)return!0
+if(!1===a)return!1
 if(a==null)return a
+throw H.b(H.D(a,"bool?"))},
+jF:function(a){if(typeof a=="number")return a
 throw H.b(H.D(a,"double"))},
 jH:function(a){if(typeof a=="number")return a
 if(a==null)return a
+throw H.b(H.D(a,"double"))},
+jG:function(a){if(typeof a=="number")return a
+if(a==null)return a
 throw H.b(H.D(a,"double?"))},
 ah:function(a){return typeof a=="number"&&Math.floor(a)===a},
-jJ:function(a){if(typeof a=="number"&&Math.floor(a)===a)return a
+jI:function(a){if(typeof a=="number"&&Math.floor(a)===a)return a
 throw H.b(H.D(a,"int"))},
 B:function(a){if(typeof a=="number"&&Math.floor(a)===a)return a
 if(a==null)return a
 throw H.b(H.D(a,"int"))},
-jK:function(a){if(typeof a=="number"&&Math.floor(a)===a)return a
+jJ:function(a){if(typeof a=="number"&&Math.floor(a)===a)return a
 if(a==null)return a
 throw H.b(H.D(a,"int?"))},
 ii:function(a){return typeof a=="number"},
-jL:function(a){if(typeof a=="number")return a
+jK:function(a){if(typeof a=="number")return a
 throw H.b(H.D(a,"num"))},
 i4:function(a){if(typeof a=="number")return a
 if(a==null)return a
 throw H.b(H.D(a,"num"))},
-jM:function(a){if(typeof a=="number")return a
+jL:function(a){if(typeof a=="number")return a
 if(a==null)return a
 throw H.b(H.D(a,"num?"))},
 ik:function(a){return typeof a=="string"},
-jN:function(a){if(typeof a=="string")return a
+jM:function(a){if(typeof a=="string")return a
 throw H.b(H.D(a,"String"))},
 Z:function(a){if(typeof a=="string")return a
 if(a==null)return a
@@ -1189,12 +1189,7 @@ _.cy=_.cx=_.ch=_.Q=_.z=null},
 ch:function ch(){this.c=this.b=this.a=null},
 cg:function cg(){},
 bs:function bs(a){this.a=a},
-fM:function(a){return v.mangledGlobalNames[a]},
-j0:function(a){if(typeof dartPrint=="function"){dartPrint(a)
-return}if(typeof console=="object"&&typeof console.log!="undefined"){console.log(a)
-return}if(typeof window=="object")return
-if(typeof print=="function"){print(a)
-return}throw"Unable to print message: "+String(a)}},J={
+fM:function(a){return v.mangledGlobalNames[a]}},J={
 eB:function(a,b,c,d){return{i:a,p:b,e:c,x:d}},
 cw:function(a){var t,s,r,q,p=a[v.dispatchPropertyName]
 if(p==null)if($.ez==null){H.iP()
@@ -1349,7 +1344,7 @@ fe:function(a,b){var t,s,r
 b.a=1
 try{a.ak(new P.dq(b),new P.dr(b),u.P)}catch(r){t=H.a7(r)
 s=H.aj(r)
-P.j1(new P.ds(b,t,s))}},
+P.j0(new P.ds(b,t,s))}},
 dp:function(a,b){var t,s,r
 for(t=u.c;s=a.a,s===2;)a=t.a(a.c)
 if(s>=4){r=b.X()
@@ -1436,10 +1431,10 @@ $.aP=$.by=t}else{r=s.b
 t.b=r
 $.by=s.b=t
 if(r==null)$.bx=t}},
-j1:function(a){var t=null,s=$.n
+j0:function(a){var t=null,s=$.n
 if(C.d===s){P.aQ(t,t,C.d,a)
 return}P.aQ(t,t,s,u.M.a(s.ae(a)))},
-jn:function(a,b){P.cD(a,"stream",b.h("aJ<0>"))
+jm:function(a,b){P.cD(a,"stream",b.h("aJ<0>"))
 return new P.cq(b.h("cq<0>"))},
 hH:function(a,b){var t=$.n
 if(t===C.d)return P.ei(a,u.M.a(b))
@@ -2013,14 +2008,13 @@ break}k=F.fI(H.Z(m[1]))
 if(0>=m.length){r=H.l(m,0)
 t=1
 break}j=m[0]
-J.a1(c.querySelector("#paivitetty"),"Refreshed: "+l+"."+k+"."+H.f(j))
+J.a1(c.querySelector("#paivitetty"),"Updated: "+l+"."+k+"."+H.f(j))
 for(p=o.length,i=u.h,h=u.aq,g=J.aS(n),f=0;f<o.length;o.length===p||(0,H.e0)(o),++f){e=o[f]
 d=h.a(i.a(W.hN("option",null)))
 C.Q.saQ(d,H.f(e)+": "+H.f(g.j(n,e)))
 d.value=H.Z(e)
 J.h4(c.querySelector("#maavalinta")).m(0,d)
-d.defaultSelected=d.value==="SEK"}J.a1(c.querySelector("#info"),"The foreign exchange references rates published by \n      the European Central Bank. \n      The data refreshes around 16:00 CET every working day.")
-H.j0("This app built with Frankfurter API, by japohjas@gmail.com")
+d.defaultSelected=d.value==="SEK"}J.a1(c.querySelector("#info"),"This app tracks the exchange rates published by the \n  European Central Bank through the Frankfurter API.\n  The data is updated around 16:00 CET every working day.")
 F.cz(q)
 c=J.h6(c.querySelector("#nappiMuunna"))
 p=c.$ti
@@ -3710,7 +3704,7 @@ t(W.cj,W.W)
 t(W.cn,P.t)
 t(W.co,W.W)})()
 var v={typeUniverse:{eC:new Map(),tR:{},eT:{},tPV:{},sEA:[]},mangledGlobalNames:{r:"int",iH:"double",bB:"num",i:"String",S:"bool",p:"Null",C:"List"},mangledNames:{},getTypeFromName:getGlobalFromName,metadata:[],types:["p()","~()","~(~())","p(@)","i(r)","S*(@)","@(@)","@(@,i)","@(i)","p(~())","~(@)","p(@,Y)","p(r,@)","~(k[Y?])","p(k,Y)","w<@>(@)","p(k?,k?)","i(M)","p(J)","@(c)","S(h)","o(h)","a8*(r*,r*,r*,r*,r*,r*,r*,S*)","aM*(i*,V*)","aL*(i*,V*)","aK*(i*,V*)","i*(aH*)","p(H*)","be<k*>*()","i*(i*)"],interceptorsByTag:null,leafTags:null,arrayRti:typeof Symbol=="function"&&typeof Symbol()=="symbol"?Symbol("$ti"):"$ti"}
-H.i1(v.typeUniverse,JSON.parse('{"X":"ac","bY":"ac","av":"ac","j6":"c","je":"c","j5":"d","jf":"d","jC":"J","j7":"e","ji":"e","jg":"h","jd":"h","jz":"u","jm":"H","j9":"Q","j8":"U","jo":"U","jh":"aa","bQ":{"S":[]},"aF":{"p":[]},"ac":{"aD":[]},"v":{"C":["1"],"j":["1"]},"cW":{"v":["1"],"C":["1"],"j":["1"]},"E":{"y":["1"]},"ao":{"bB":[]},"b4":{"r":[],"bB":[]},"b3":{"bB":[]},"ab":{"i":[],"bX":[]},"b_":{"j":["1"]},"N":{"j":["1"]},"ar":{"y":["1"]},"b9":{"j":["2"],"j.E":"2"},"ba":{"y":["2"]},"bg":{"j":["1"],"j.E":"1"},"bh":{"y":["1"]},"bd":{"N":["1"],"j":["1"],"j.E":"1","N.E":"1"},"aX":{"ad":["1","2"]},"aY":{"aX":["1","2"],"ad":["1","2"]},"bk":{"j":["1"],"j.E":"1"},"bU":{"m":[]},"bS":{"m":[]},"c8":{"m":[]},"bq":{"Y":[]},"al":{"aD":[]},"c3":{"aD":[]},"c0":{"aD":[]},"aB":{"aD":[]},"bZ":{"m":[]},"ca":{"m":[]},"ap":{"G":["1","2"],"eV":["1","2"],"ad":["1","2"],"G.K":"1","G.V":"2"},"aq":{"j":["1"],"j.E":"1"},"b6":{"y":["1"]},"b5":{"eh":[],"bX":[]},"cg":{"m":[]},"bs":{"m":[]},"bi":{"bj":["1"]},"w":{"a9":["1"]},"aV":{"m":[]},"bv":{"fc":[]},"cp":{"bv":[],"fc":[]},"bn":{"bp":["1"],"eX":["1"],"be":["1"],"j":["1"]},"ay":{"y":["1"]},"b2":{"j":["1"]},"b7":{"t":["1"],"C":["1"],"j":["1"]},"b8":{"G":["1","2"],"ad":["1","2"]},"G":{"ad":["1","2"]},"bp":{"be":["1"],"j":["1"]},"ck":{"G":["i","@"],"ad":["i","@"],"G.K":"i","G.V":"@"},"cl":{"N":["i"],"j":["i"],"j.E":"i","N.E":"i"},"bT":{"bH":["i","k?"]},"r":{"bB":[]},"eh":{"bX":[]},"be":{"j":["1"]},"i":{"bX":[]},"aU":{"m":[]},"c4":{"m":[]},"bV":{"m":[]},"T":{"m":[]},"bc":{"m":[]},"bO":{"m":[]},"c9":{"m":[]},"c5":{"m":[]},"c_":{"m":[]},"bG":{"m":[]},"bW":{"m":[]},"bf":{"m":[]},"bI":{"m":[]},"cr":{"Y":[]},"e":{"o":[],"h":[],"u":[]},"bD":{"o":[],"h":[],"u":[]},"bE":{"o":[],"h":[],"u":[]},"U":{"h":[],"u":[]},"ce":{"t":["o"],"C":["o"],"j":["o"],"t.E":"o"},"o":{"h":[],"u":[]},"bN":{"o":[],"h":[],"u":[]},"aa":{"t":["h"],"W":["h"],"C":["h"],"bR":["h"],"j":["h"],"t.E":"h","W.E":"h"},"M":{"u":[]},"b1":{"u":[]},"an":{"o":[],"h":[],"u":[]},"H":{"c":[]},"cd":{"t":["h"],"C":["h"],"j":["h"],"t.E":"h"},"h":{"u":[]},"aG":{"t":["h"],"W":["h"],"C":["h"],"bR":["h"],"j":["h"],"t.E":"h","W.E":"h"},"as":{"o":[],"h":[],"u":[]},"J":{"c":[]},"aI":{"o":[],"h":[],"u":[]},"Q":{"c":[]},"bl":{"aJ":["1"]},"aN":{"bl":["1"],"aJ":["1"]},"bm":{"c1":["1"]},"am":{"y":["1"]},"bM":{"t":["o"],"C":["o"],"j":["o"],"t.E":"o"},"d":{"o":[],"h":[],"u":[]},"aK":{"a4":[]},"aM":{"a4":[]},"aL":{"a4":[]},"dE":{"j":["i*"],"j.E":"i*"},"br":{"y":["i*"]}}'))
+H.i1(v.typeUniverse,JSON.parse('{"X":"ac","bY":"ac","av":"ac","j5":"c","jd":"c","j4":"d","je":"d","jB":"J","j6":"e","jh":"e","jf":"h","jc":"h","jy":"u","jl":"H","j8":"Q","j7":"U","jn":"U","jg":"aa","bQ":{"S":[]},"aF":{"p":[]},"ac":{"aD":[]},"v":{"C":["1"],"j":["1"]},"cW":{"v":["1"],"C":["1"],"j":["1"]},"E":{"y":["1"]},"ao":{"bB":[]},"b4":{"r":[],"bB":[]},"b3":{"bB":[]},"ab":{"i":[],"bX":[]},"b_":{"j":["1"]},"N":{"j":["1"]},"ar":{"y":["1"]},"b9":{"j":["2"],"j.E":"2"},"ba":{"y":["2"]},"bg":{"j":["1"],"j.E":"1"},"bh":{"y":["1"]},"bd":{"N":["1"],"j":["1"],"j.E":"1","N.E":"1"},"aX":{"ad":["1","2"]},"aY":{"aX":["1","2"],"ad":["1","2"]},"bk":{"j":["1"],"j.E":"1"},"bU":{"m":[]},"bS":{"m":[]},"c8":{"m":[]},"bq":{"Y":[]},"al":{"aD":[]},"c3":{"aD":[]},"c0":{"aD":[]},"aB":{"aD":[]},"bZ":{"m":[]},"ca":{"m":[]},"ap":{"G":["1","2"],"eV":["1","2"],"ad":["1","2"],"G.K":"1","G.V":"2"},"aq":{"j":["1"],"j.E":"1"},"b6":{"y":["1"]},"b5":{"eh":[],"bX":[]},"cg":{"m":[]},"bs":{"m":[]},"bi":{"bj":["1"]},"w":{"a9":["1"]},"aV":{"m":[]},"bv":{"fc":[]},"cp":{"bv":[],"fc":[]},"bn":{"bp":["1"],"eX":["1"],"be":["1"],"j":["1"]},"ay":{"y":["1"]},"b2":{"j":["1"]},"b7":{"t":["1"],"C":["1"],"j":["1"]},"b8":{"G":["1","2"],"ad":["1","2"]},"G":{"ad":["1","2"]},"bp":{"be":["1"],"j":["1"]},"ck":{"G":["i","@"],"ad":["i","@"],"G.K":"i","G.V":"@"},"cl":{"N":["i"],"j":["i"],"j.E":"i","N.E":"i"},"bT":{"bH":["i","k?"]},"r":{"bB":[]},"eh":{"bX":[]},"be":{"j":["1"]},"i":{"bX":[]},"aU":{"m":[]},"c4":{"m":[]},"bV":{"m":[]},"T":{"m":[]},"bc":{"m":[]},"bO":{"m":[]},"c9":{"m":[]},"c5":{"m":[]},"c_":{"m":[]},"bG":{"m":[]},"bW":{"m":[]},"bf":{"m":[]},"bI":{"m":[]},"cr":{"Y":[]},"e":{"o":[],"h":[],"u":[]},"bD":{"o":[],"h":[],"u":[]},"bE":{"o":[],"h":[],"u":[]},"U":{"h":[],"u":[]},"ce":{"t":["o"],"C":["o"],"j":["o"],"t.E":"o"},"o":{"h":[],"u":[]},"bN":{"o":[],"h":[],"u":[]},"aa":{"t":["h"],"W":["h"],"C":["h"],"bR":["h"],"j":["h"],"t.E":"h","W.E":"h"},"M":{"u":[]},"b1":{"u":[]},"an":{"o":[],"h":[],"u":[]},"H":{"c":[]},"cd":{"t":["h"],"C":["h"],"j":["h"],"t.E":"h"},"h":{"u":[]},"aG":{"t":["h"],"W":["h"],"C":["h"],"bR":["h"],"j":["h"],"t.E":"h","W.E":"h"},"as":{"o":[],"h":[],"u":[]},"J":{"c":[]},"aI":{"o":[],"h":[],"u":[]},"Q":{"c":[]},"bl":{"aJ":["1"]},"aN":{"bl":["1"],"aJ":["1"]},"bm":{"c1":["1"]},"am":{"y":["1"]},"bM":{"t":["o"],"C":["o"],"j":["o"],"t.E":"o"},"d":{"o":[],"h":[],"u":[]},"aK":{"a4":[]},"aM":{"a4":[]},"aL":{"a4":[]},"dE":{"j":["i*"],"j.E":"i*"},"br":{"y":["i*"]}}'))
 H.i0(v.typeUniverse,JSON.parse('{"b_":1,"c2":2,"b2":1,"b7":1,"b8":2,"bo":1,"bF":2}'))
 0
 var u=(function rtii(){var t=H.a_
@@ -3888,34 +3882,34 @@ $.eO=P.hu(H.a_("i*"),H.a_("S*"))
 $.fy=P.eW(["ADP",0,"AFN",0,"ALL",0,"AMD",2,"BHD",3,"BIF",0,"BYN",2,"BYR",0,"CAD",2,"CHF",2,"CLF",4,"CLP",0,"COP",2,"CRC",2,"CZK",2,"DEFAULT",2,"DJF",0,"DKK",2,"ESP",0,"GNF",0,"GYD",2,"HUF",2,"IDR",2,"IQD",0,"IRR",0,"ISK",0,"ITL",0,"JOD",3,"JPY",0,"KMF",0,"KPW",0,"KRW",0,"KWD",3,"LAK",0,"LBP",0,"LUF",0,"LYD",3,"MGA",0,"MGF",0,"MMK",0,"MNT",2,"MRO",0,"MUR",2,"NOK",2,"OMR",3,"PKR",2,"PYG",0,"RSD",0,"RWF",0,"SEK",2,"SLL",0,"SOS",0,"STD",0,"SYP",0,"TMM",0,"TND",3,"TRL",0,"TWD",2,"TZS",2,"UGX",0,"UYI",0,"UYW",4,"UZS",2,"VEF",2,"VND",0,"VUV",0,"XAF",0,"XOF",0,"XPF",0,"YER",0,"ZMK",0,"ZWD",0],H.a_("i*"),H.a_("r*"))
 $.dO=null
 $.dY=null})();(function lazyInitializers(){var t=hunkHelpers.lazy,s=hunkHelpers.lazyOld
-t($,"ja","fO",function(){return H.iM("_$dart_dartClosure")})
-t($,"jp","fS",function(){return H.a3(H.dd({
+t($,"j9","fO",function(){return H.iM("_$dart_dartClosure")})
+t($,"jo","fS",function(){return H.a3(H.dd({
 toString:function(){return"$receiver$"}}))})
-t($,"jq","fT",function(){return H.a3(H.dd({$method$:null,
+t($,"jp","fT",function(){return H.a3(H.dd({$method$:null,
 toString:function(){return"$receiver$"}}))})
-t($,"jr","fU",function(){return H.a3(H.dd(null))})
-t($,"js","fV",function(){return H.a3(function(){var $argumentsExpr$='$arguments$'
+t($,"jq","fU",function(){return H.a3(H.dd(null))})
+t($,"jr","fV",function(){return H.a3(function(){var $argumentsExpr$='$arguments$'
 try{null.$method$($argumentsExpr$)}catch(r){return r.message}}())})
-t($,"jv","fY",function(){return H.a3(H.dd(void 0))})
-t($,"jw","fZ",function(){return H.a3(function(){var $argumentsExpr$='$arguments$'
+t($,"ju","fY",function(){return H.a3(H.dd(void 0))})
+t($,"jv","fZ",function(){return H.a3(function(){var $argumentsExpr$='$arguments$'
 try{(void 0).$method$($argumentsExpr$)}catch(r){return r.message}}())})
-t($,"ju","fX",function(){return H.a3(H.fa(null))})
-t($,"jt","fW",function(){return H.a3(function(){try{null.$method$}catch(r){return r.message}}())})
-t($,"jy","h0",function(){return H.a3(H.fa(void 0))})
-t($,"jx","h_",function(){return H.a3(function(){try{(void 0).$method$}catch(r){return r.message}}())})
-t($,"jA","eC",function(){return P.hI()})
-s($,"jS","h2",function(){return new B.bJ("en_US",C.K,C.I,C.n,C.n,C.k,C.k,C.m,C.m,C.o,C.o,C.l,C.l,C.H,C.M,C.N,C.J)})
-s($,"jc","fQ",function(){return H.q([P.d9("^'(?:[^']|'')*'"),P.d9("^(?:G+|y+|M+|k+|S+|E+|a+|h+|K+|H+|c+|L+|Q+|d+|D+|m+|s+|v+|z+|Z+)"),P.d9("^[^'GyMkSEahKHcLQdDmsvzZ]+")],H.a_("v<eh*>"))})
-s($,"jb","fP",function(){return 48})
-s($,"jB","h1",function(){return P.d9("''")})
-s($,"jj","e1",function(){return P.eA(10)})
-s($,"jl","e2",function(){var r=P.j_(2,52)
+t($,"jt","fX",function(){return H.a3(H.fa(null))})
+t($,"js","fW",function(){return H.a3(function(){try{null.$method$}catch(r){return r.message}}())})
+t($,"jx","h0",function(){return H.a3(H.fa(void 0))})
+t($,"jw","h_",function(){return H.a3(function(){try{(void 0).$method$}catch(r){return r.message}}())})
+t($,"jz","eC",function(){return P.hI()})
+s($,"jR","h2",function(){return new B.bJ("en_US",C.K,C.I,C.n,C.n,C.k,C.k,C.m,C.m,C.o,C.o,C.l,C.l,C.H,C.M,C.N,C.J)})
+s($,"jb","fQ",function(){return H.q([P.d9("^'(?:[^']|'')*'"),P.d9("^(?:G+|y+|M+|k+|S+|E+|a+|h+|K+|H+|c+|L+|Q+|d+|D+|m+|s+|v+|z+|Z+)"),P.d9("^[^'GyMkSEahKHcLQdDmsvzZ]+")],H.a_("v<eh*>"))})
+s($,"ja","fP",function(){return 48})
+s($,"jA","h1",function(){return P.d9("''")})
+s($,"ji","e1",function(){return P.eA(10)})
+s($,"jk","e2",function(){var r=P.j_(2,52)
 return r})
-s($,"jk","fR",function(){return C.f.aH(P.eA($.e2())/P.eA(10))})
-s($,"jT","eE",function(){var r=",",q="\xa0",p="%",o="0",n="+",m="-",l="E",k="\u2030",j="\u221e",i="NaN",h="#,##0.###",g="#E0",f="#,##0%",e="\xa4#,##0.00",d=".",c="\u200e+",b="\u200e-",a="\u0644\u064a\u0633\xa0\u0631\u0642\u0645\u064b\u0627",a0="\xa4\xa0#,##0.00",a1="#,##0.00\xa0\xa4",a2="#,##0\xa0%",a3="#,##,##0.###",a4="EUR",a5="USD",a6="\xa4\xa0#,##0.00;\xa4-#,##0.00",a7="CHF",a8="#,##,##0%",a9="\xa4\xa0#,##,##0.00",b0="INR",b1="\u2212",b2="\xd710^",b3="[#E0]",b4="\xa4#,##,##0.00",b5="\u200f#,##0.00\xa0\xa4;\u200f-#,##0.00\xa0\xa4"
+s($,"jj","fR",function(){return C.f.aH(P.eA($.e2())/P.eA(10))})
+s($,"jS","eE",function(){var r=",",q="\xa0",p="%",o="0",n="+",m="-",l="E",k="\u2030",j="\u221e",i="NaN",h="#,##0.###",g="#E0",f="#,##0%",e="\xa4#,##0.00",d=".",c="\u200e+",b="\u200e-",a="\u0644\u064a\u0633\xa0\u0631\u0642\u0645\u064b\u0627",a0="\xa4\xa0#,##0.00",a1="#,##0.00\xa0\xa4",a2="#,##0\xa0%",a3="#,##,##0.###",a4="EUR",a5="USD",a6="\xa4\xa0#,##0.00;\xa4-#,##0.00",a7="CHF",a8="#,##,##0%",a9="\xa4\xa0#,##,##0.00",b0="INR",b1="\u2212",b2="\xd710^",b3="[#E0]",b4="\xa4#,##,##0.00",b5="\u200f#,##0.00\xa0\xa4;\u200f-#,##0.00\xa0\xa4"
 return P.eW(["af",B.a(e,h,r,"ZAR",l,q,j,m,"af",i,p,f,k,n,g,o),"am",B.a(e,h,d,"ETB",l,r,j,m,"am",i,p,f,k,n,g,o),"ar",B.a(a0,h,d,"EGP",l,r,j,b,"ar",a,"\u200e%\u200e",f,k,c,g,o),"ar_DZ",B.a(a0,h,r,"DZD",l,d,j,b,"ar_DZ",a,"\u200e%\u200e",f,k,c,g,o),"ar_EG",B.a(a1,h,"\u066b","EGP","\u0627\u0633","\u066c",j,"\u061c-","ar_EG","\u0644\u064a\u0633\xa0\u0631\u0642\u0645","\u066a\u061c",f,"\u0609","\u061c+",g,"\u0660"),"az",B.a(a1,h,r,"AZN",l,d,j,m,"az",i,p,f,k,n,g,o),"be",B.a(a1,h,r,"BYN",l,q,j,m,"be",i,p,a2,k,n,g,o),"bg",B.a("0.00\xa0\xa4",h,r,"BGN",l,q,j,m,"bg",i,p,f,k,n,g,o),"bn",B.a("#,##,##0.00\xa4",a3,d,"BDT",l,r,j,m,"bn",i,p,f,k,n,g,"\u09e6"),"br",B.a(a1,h,r,a4,l,q,j,m,"br",i,p,a2,k,n,g,o),"bs",B.a(a1,h,r,"BAM",l,d,j,m,"bs",i,p,a2,k,n,g,o),"ca",B.a(a1,h,r,a4,l,d,j,m,"ca",i,p,f,k,n,g,o),"chr",B.a(e,h,d,a5,l,r,j,m,"chr",i,p,f,k,n,g,o),"cs",B.a(a1,h,r,"CZK",l,q,j,m,"cs",i,p,a2,k,n,g,o),"cy",B.a(e,h,d,"GBP",l,r,j,m,"cy",i,p,f,k,n,g,o),"da",B.a(a1,h,r,"DKK",l,d,j,m,"da",i,p,a2,k,n,g,o),"de",B.a(a1,h,r,a4,l,d,j,m,"de",i,p,a2,k,n,g,o),"de_AT",B.a(a0,h,r,a4,l,q,j,m,"de_AT",i,p,a2,k,n,g,o),"de_CH",B.a(a6,h,d,a7,l,"\u2019",j,m,"de_CH",i,p,f,k,n,g,o),"el",B.a(a1,h,r,a4,"e",d,j,m,"el",i,p,f,k,n,g,o),"en",B.a(e,h,d,a5,l,r,j,m,"en",i,p,f,k,n,g,o),"en_AU",B.a(e,h,d,"AUD","e",r,j,m,"en_AU",i,p,f,k,n,g,o),"en_CA",B.a(e,h,d,"CAD","e",r,j,m,"en_CA",i,p,f,k,n,g,o),"en_GB",B.a(e,h,d,"GBP",l,r,j,m,"en_GB",i,p,f,k,n,g,o),"en_IE",B.a(e,h,d,a4,l,r,j,m,"en_IE",i,p,f,k,n,g,o),"en_IN",B.a(a9,a3,d,b0,l,r,j,m,"en_IN",i,p,a8,k,n,g,o),"en_MY",B.a(e,h,d,"MYR",l,r,j,m,"en_MY",i,p,f,k,n,g,o),"en_SG",B.a(e,h,d,"SGD",l,r,j,m,"en_SG",i,p,f,k,n,g,o),"en_US",B.a(e,h,d,a5,l,r,j,m,"en_US",i,p,f,k,n,g,o),"en_ZA",B.a(e,h,r,"ZAR",l,q,j,m,"en_ZA",i,p,f,k,n,g,o),"es",B.a(a1,h,r,a4,l,d,j,m,"es",i,p,a2,k,n,g,o),"es_419",B.a(e,h,d,"MXN",l,r,j,m,"es_419",i,p,a2,k,n,g,o),"es_ES",B.a(a1,h,r,a4,l,d,j,m,"es_ES",i,p,a2,k,n,g,o),"es_MX",B.a(e,h,d,"MXN",l,r,j,m,"es_MX",i,p,a2,k,n,g,o),"es_US",B.a(e,h,d,a5,l,r,j,m,"es_US",i,p,a2,k,n,g,o),"et",B.a(a1,h,r,a4,b2,q,j,b1,"et",i,p,f,k,n,g,o),"eu",B.a(a1,h,r,a4,l,d,j,b1,"eu",i,p,"%\xa0#,##0",k,n,g,o),"fa",B.a("\u200e\xa4#,##0.00",h,"\u066b","IRR","\xd7\u06f1\u06f0^","\u066c",j,"\u200e\u2212","fa","\u0646\u0627\u0639\u062f\u062f","\u066a",f,"\u0609",c,g,"\u06f0"),"fi",B.a(a1,h,r,a4,l,q,j,b1,"fi","ep\xe4luku",p,a2,k,n,g,o),"fil",B.a(e,h,d,"PHP",l,r,j,m,"fil",i,p,f,k,n,g,o),"fr",B.a(a1,h,r,a4,l,"\u202f",j,m,"fr",i,p,a2,k,n,g,o),"fr_CA",B.a(a1,h,r,"CAD",l,q,j,m,"fr_CA",i,p,a2,k,n,g,o),"fr_CH",B.a(a1,h,r,a7,l,"\u202f",j,m,"fr_CH",i,p,f,k,n,g,o),"ga",B.a(e,h,d,a4,l,r,j,m,"ga",i,p,f,k,n,g,o),"gl",B.a(a1,h,r,a4,l,d,j,m,"gl",i,p,a2,k,n,g,o),"gsw",B.a(a1,h,d,a7,l,"\u2019",j,b1,"gsw",i,p,a2,k,n,g,o),"gu",B.a(b4,a3,d,b0,l,r,j,m,"gu",i,p,a8,k,n,b3,o),"haw",B.a(e,h,d,a5,l,r,j,m,"haw",i,p,f,k,n,g,o),"he",B.a(b5,h,d,"ILS",l,r,j,b,"he",i,p,f,k,c,g,o),"hi",B.a(b4,a3,d,b0,l,r,j,m,"hi",i,p,a8,k,n,b3,o),"hr",B.a(a1,h,r,"HRK",l,d,j,m,"hr",i,p,a2,k,n,g,o),"hu",B.a(a1,h,r,"HUF",l,q,j,m,"hu",i,p,f,k,n,g,o),"hy",B.a(a1,h,r,"AMD",l,q,j,m,"hy","\u0548\u0579\u0539",p,f,k,n,g,o),"id",B.a(e,h,r,"IDR",l,d,j,m,"id",i,p,f,k,n,g,o),"in",B.a(e,h,r,"IDR",l,d,j,m,"in",i,p,f,k,n,g,o),"is",B.a(a1,h,r,"ISK",l,d,j,m,"is",i,p,f,k,n,g,o),"it",B.a(a1,h,r,a4,l,d,j,m,"it",i,p,f,k,n,g,o),"it_CH",B.a(a6,h,d,a7,l,"\u2019",j,m,"it_CH",i,p,f,k,n,g,o),"iw",B.a(b5,h,d,"ILS",l,r,j,b,"iw",i,p,f,k,c,g,o),"ja",B.a(e,h,d,"JPY",l,r,j,m,"ja",i,p,f,k,n,g,o),"ka",B.a(a1,h,r,"GEL",l,q,j,m,"ka","\u10d0\u10e0\xa0\u10d0\u10e0\u10d8\u10e1\xa0\u10e0\u10d8\u10ea\u10ee\u10d5\u10d8",p,f,k,n,g,o),"kk",B.a(a1,h,r,"KZT",l,q,j,m,"kk","\u0441\u0430\u043d\xa0\u0435\u043c\u0435\u0441",p,f,k,n,g,o),"km",B.a("#,##0.00\xa4",h,r,"KHR",l,d,j,m,"km",i,p,f,k,n,g,o),"kn",B.a(e,h,d,b0,l,r,j,m,"kn",i,p,f,k,n,g,o),"ko",B.a(e,h,d,"KRW",l,r,j,m,"ko",i,p,f,k,n,g,o),"ky",B.a(a1,h,r,"KGS",l,q,j,m,"ky","\u0441\u0430\u043d\xa0\u044d\u043c\u0435\u0441",p,f,k,n,g,o),"ln",B.a(a1,h,r,"CDF",l,d,j,m,"ln",i,p,f,k,n,g,o),"lo",B.a("\xa4#,##0.00;\xa4-#,##0.00",h,r,"LAK",l,d,j,m,"lo","\u0e9a\u0ecd\u0ec8\u200b\u0ec1\u0ea1\u0ec8\u0e99\u200b\u0ec2\u0e95\u200b\u0ec0\u0ea5\u0e81",p,f,k,n,"#",o),"lt",B.a(a1,h,r,a4,b2,q,j,b1,"lt",i,p,a2,k,n,g,o),"lv",B.a(a1,h,r,a4,l,q,j,m,"lv","NS",p,f,k,n,g,o),"mk",B.a(a1,h,r,"MKD",l,d,j,m,"mk",i,p,f,k,n,g,o),"ml",B.a(e,a3,d,b0,l,r,j,m,"ml",i,p,f,k,n,g,o),"mn",B.a(a0,h,d,"MNT",l,r,j,m,"mn",i,p,f,k,n,g,o),"mr",B.a(e,a3,d,b0,l,r,j,m,"mr",i,p,f,k,n,b3,"\u0966"),"ms",B.a(e,h,d,"MYR",l,r,j,m,"ms",i,p,f,k,n,g,o),"mt",B.a(e,h,d,a4,l,r,j,m,"mt",i,p,f,k,n,g,o),"my",B.a(a1,h,d,"MMK",l,r,j,m,"my","\u1002\u100f\u1014\u103a\u1038\u1019\u101f\u102f\u1010\u103a\u101e\u1031\u102c",p,f,k,n,g,"\u1040"),"nb",B.a(a0,h,r,"NOK",l,q,j,b1,"nb",i,p,a2,k,n,g,o),"ne",B.a(a0,h,d,"NPR",l,r,j,m,"ne",i,p,f,k,n,g,"\u0966"),"nl",B.a("\xa4\xa0#,##0.00;\xa4\xa0-#,##0.00",h,r,a4,l,d,j,m,"nl",i,p,f,k,n,g,o),"no",B.a(a0,h,r,"NOK",l,q,j,b1,"no",i,p,a2,k,n,g,o),"no_NO",B.a(a0,h,r,"NOK",l,q,j,b1,"no_NO",i,p,a2,k,n,g,o),"or",B.a(e,a3,d,b0,l,r,j,m,"or",i,p,f,k,n,g,o),"pa",B.a(a9,a3,d,b0,l,r,j,m,"pa",i,p,a8,k,n,b3,o),"pl",B.a(a1,h,r,"PLN",l,q,j,m,"pl",i,p,f,k,n,g,o),"ps",B.a(a1,h,"\u066b","AFN","\xd7\u06f1\u06f0^","\u066c",j,"\u200e-\u200e","ps",i,"\u066a",f,"\u0609","\u200e+\u200e",g,"\u06f0"),"pt",B.a(a0,h,r,"BRL",l,d,j,m,"pt",i,p,f,k,n,g,o),"pt_BR",B.a(a0,h,r,"BRL",l,d,j,m,"pt_BR",i,p,f,k,n,g,o),"pt_PT",B.a(a1,h,r,a4,l,q,j,m,"pt_PT",i,p,f,k,n,g,o),"ro",B.a(a1,h,r,"RON",l,d,j,m,"ro",i,p,a2,k,n,g,o),"ru",B.a(a1,h,r,"RUB",l,q,j,m,"ru","\u043d\u0435\xa0\u0447\u0438\u0441\u043b\u043e",p,a2,k,n,g,o),"si",B.a(e,h,d,"LKR",l,r,j,m,"si",i,p,f,k,n,"#",o),"sk",B.a(a1,h,r,a4,"e",q,j,m,"sk",i,p,a2,k,n,g,o),"sl",B.a(a1,h,r,a4,"e",d,j,b1,"sl",i,p,a2,k,n,g,o),"sq",B.a(a1,h,r,"ALL",l,q,j,m,"sq",i,p,f,k,n,g,o),"sr",B.a(a1,h,r,"RSD",l,d,j,m,"sr",i,p,f,k,n,g,o),"sr_Latn",B.a(a1,h,r,"RSD",l,d,j,m,"sr_Latn",i,p,f,k,n,g,o),"sv",B.a(a1,h,r,"SEK",b2,q,j,b1,"sv",i,p,a2,k,n,g,o),"sw",B.a(a0,h,d,"TZS",l,r,j,m,"sw",i,p,f,k,n,g,o),"ta",B.a(a9,a3,d,b0,l,r,j,m,"ta",i,p,a8,k,n,g,o),"te",B.a(b4,a3,d,b0,l,r,j,m,"te",i,p,f,k,n,g,o),"th",B.a(e,h,d,"THB",l,r,j,m,"th",i,p,f,k,n,g,o),"tl",B.a(e,h,d,"PHP",l,r,j,m,"tl",i,p,f,k,n,g,o),"tr",B.a(e,h,r,"TRY",l,d,j,m,"tr",i,p,"%#,##0",k,n,g,o),"uk",B.a(a1,h,r,"UAH","\u0415",q,j,m,"uk",i,p,f,k,n,g,o),"ur",B.a(a0,h,d,"PKR",l,r,j,b,"ur",i,p,f,k,c,g,o),"uz",B.a(a1,h,r,"UZS",l,q,j,m,"uz","son\xa0emas",p,f,k,n,g,o),"vi",B.a(a1,h,r,"VND",l,d,j,m,"vi",i,p,f,k,n,g,o),"zh",B.a(e,h,d,"CNY",l,r,j,m,"zh",i,p,f,k,n,g,o),"zh_CN",B.a(e,h,d,"CNY",l,r,j,m,"zh_CN",i,p,f,k,n,g,o),"zh_HK",B.a(e,h,d,"HKD",l,r,j,m,"zh_HK","\u975e\u6578\u503c",p,f,k,n,g,o),"zh_TW",B.a(e,h,d,"TWD",l,r,j,m,"zh_TW","\u975e\u6578\u503c",p,f,k,n,g,o),"zu",B.a(e,h,d,"ZAR",l,r,j,m,"zu",i,p,f,k,n,g,o)],H.a_("i*"),H.a_("aH*"))})
-s($,"jO","e3",function(){return X.fb("initializeDateFormatting(<locale>)",$.h2(),u.E)})
-s($,"jQ","eD",function(){return X.fb("initializeDateFormatting(<locale>)",C.O,H.a_("ad<i*,i*>*"))})})();(function nativeSupport(){!function(){var t=function(a){var n={}
+s($,"jN","e3",function(){return X.fb("initializeDateFormatting(<locale>)",$.h2(),u.E)})
+s($,"jP","eD",function(){return X.fb("initializeDateFormatting(<locale>)",C.O,H.a_("ad<i*,i*>*"))})})();(function nativeSupport(){!function(){var t=function(a){var n={}
 n[a]=1
 return Object.keys(hunkHelpers.convertToFastObject(n))[0]}
 v.getIsolateTag=function(a){return t("___dart_"+a+v.isolateTag)}
