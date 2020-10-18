@@ -2,12 +2,16 @@ import 'dart:html';
 import 'dart:convert';
 import 'package:intl/intl.dart'; // päivämäärä
 
-// https://www.frankfurter.app/docs/
-// https://pub.dev/packages/intl
-// https://stackoverflow.com/questions/16126579/how-do-i-format-a-date-with-dart
-// https://pub.dev/documentation/intl/latest/intl/NumberFormat-class.html
-// https://dart.dev/codelabs/async-await      // Future.delayed
-// 29.9.2020 Jari Pohjasmäki japohjas@gmail.com
+/*
+29.9.2020 Jari Pohjasmäki japohjas@gmail.com
+This app built with Frankfurter API
+https://www.frankfurter.app/docs/
+https://pub.dev/packages/intl
+https://stackoverflow.com/questions/16126579/how-do-i-format-a-date-with-dart
+https://pub.dev/documentation/intl/latest/intl/NumberFormat-class.html
+https://dart.dev/codelabs/async-await      // Future.delayed
+18.10.2020 lisätty: try catch
+*/
 
 void main() {
   kaynnista();
@@ -16,15 +20,18 @@ void main() {
 void kaynnista() async {
   haePaivamaara();
 
-  var sisaltoKurssit =
-      await HttpRequest.getString('https://api.frankfurter.app/latest');
-  var dataKurssit = jsonDecode(sisaltoKurssit);
-  var maalista = dataKurssit['rates'].keys.toList(); // toList()
+  var dataKurssit = await haeSisalto('https://api.frankfurter.app/latest');
+  if (dataKurssit == null) {
+    return;
+  }
+
+  var maalista = dataKurssit['rates'].keys.toList();
   // print(maalista);
 
-  var sisaltoMaat =
-      await HttpRequest.getString('https://api.frankfurter.app/currencies');
-  var dataMaat = jsonDecode(sisaltoMaat);
+  var dataMaat = await haeSisalto('https://api.frankfurter.app/currencies');
+  if (dataMaat == null) {
+    return;
+  }
 
   var datePalat = dataKurssit['date'].split('-');
   // print(datePalat);
@@ -41,6 +48,7 @@ void kaynnista() async {
     elementti.defaultSelected = elementti.value == 'SEK';
   }
 
+  naytaInfoTexti();
   muunna(dataKurssit);
 
   querySelector('#nappiMuunna').onClick.listen((e) {
@@ -48,11 +56,32 @@ void kaynnista() async {
   });
 }
 
+Future haeSisalto(osoite) async {
+  try {
+    // Make the GET request
+    var jsonString = await HttpRequest.getString(osoite);
+    // print(jsonDecode(jsonString));
+    return jsonDecode(jsonString);
+  } catch (e) {
+    // The GET request failed. Handle the error.
+    querySelector('#info').text = 'Request failed. Couldn\'t open $osoite';
+  }
+}
+
 void haePaivamaara() {
   var now = DateTime.now();
   var formatter = DateFormat('EEEE, d.M.yyyy');
   var formatted = formatter.format(now);
   querySelector('#date').text = formatted;
+}
+
+void naytaInfoTexti() {
+  var infoText = '''The foreign exchange references rates published by 
+      the European Central Bank. 
+      The data refreshes around 16:00 CET every working day.''';
+
+  querySelector('#info').text = infoText;
+  print('This app built with Frankfurter API, by japohjas@gmail.com');
 }
 
 String poistaEtunolla(String mjono) {
@@ -94,8 +123,10 @@ void muunna(data) async {
   var tarkka = syote == 1;
 
   querySelector('#solu1').text = '${format(syote, tarkka)} $perusvaluutta';
+  querySelector('#solu2').text = '=';
   querySelector('#solu3').text = '${format(tulosKerto, tarkka)} $valuutta';
   querySelector('#solu4').text = '${format(syote, tarkka)} $valuutta';
+  querySelector('#solu5').text = '=';
   querySelector('#solu6').text = '${format(tulosJako, tarkka)} $perusvaluutta';
 }
 

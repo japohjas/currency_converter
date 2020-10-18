@@ -22,6 +22,11 @@ html, body {
   margin-top: 0%;
 }
 
+#info {
+  margin-left: 1.2rem;
+  margin-right: 1.2rem;
+}
+
 #maavalinta { 
   font-size: 1.2rem;
   background-color: rgb(186, 243, 243);

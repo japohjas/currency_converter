@@ -1,4 +1,7 @@
-30.9.2020 Jari Pohjasmäki
+© Jari Pohjasmäki 2020
+japohjas@gmail.com
+
+This app built with Frankfurter API.
 
 An absolute bare-bones web app.
 
