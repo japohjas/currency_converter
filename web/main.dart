@@ -14,10 +14,13 @@ https://dart.dev/codelabs/async-await      // Future.delayed
 */
 
 void main() {
-  kaynnista();
+  var info = '''This app tracks the exchange rates published by the 
+  European Central Bank through the Frankfurter API.
+  The data is updated around 16:00 CET every working day.''';
+  kaynnista(info);
 }
 
-void kaynnista() async {
+void kaynnista(info) async {
   querySelector('#date').text = paivamaara();
 
   var dataKurssit = await haeSisalto('https://api.frankfurter.app/latest');
@@ -49,7 +52,7 @@ void kaynnista() async {
     elementti.defaultSelected = elementti.value == 'SEK';
   }
 
-  querySelector('#info').text = infoteksti();
+  querySelector('#info').text = info;
   muunna(dataKurssit);
 
   querySelector('#nappiMuunna').onClick.listen((e) {
@@ -73,12 +76,6 @@ String paivamaara() {
   var now = DateTime.now();
   var formatter = DateFormat('EEEE, d.M.yyyy');
   return formatter.format(now);
-}
-
-String infoteksti() {
-  return '''This app tracks the exchange rates published by the 
-  European Central Bank through the Frankfurter API.
-  The data will be updated around 16:00 CET every working day.''';
 }
 
 String poistaEtunolla(String mjono) {
