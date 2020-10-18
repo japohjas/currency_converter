@@ -1981,20 +1981,20 @@ _.b=b
 _.c=c
 _.$ti=d},
 d_:function d_(a){this.a=a}},F={
-fG:function(){F.cy()},
-cy:function(){var t=0,s=P.ev(u.z),r,q,p,o,n,m,l,k,j,i,h,g,f,e,d,c
-var $async$cy=P.ew(function(a,b){if(a===1)return P.ep(b,s)
+fG:function(){F.cy("This app tracks the exchange rates published by the \n  European Central Bank through the Frankfurter API.\n  The data is updated around 16:00 CET every working day.")},
+cy:function(a){var t=0,s=P.ev(u.z),r,q,p,o,n,m,l,k,j,i,h,g,f,e,d,c
+var $async$cy=P.ew(function(b,a0){if(b===1)return P.ep(a0,s)
 while(true)switch(t){case 0:e=document
 d=e.querySelector("#date")
 c=Date.now()
 J.a1(d,T.hg("EEEE, d.M.yyyy").H(new P.a8(c,!1)))
 t=3
 return P.dH(F.cx("https://api.frankfurter.app/latest"),$async$cy)
-case 3:q=b
+case 3:q=a0
 if(q==null){t=1
 break}t=4
 return P.dH(F.cx("https://api.frankfurter.app/currencies"),$async$cy)
-case 4:p=b
+case 4:p=a0
 if(p==null){t=1
 break}d=J.aS(q)
 o=d.j(q,"rates").gF().a2(0)
@@ -2014,7 +2014,7 @@ f=j.a(c.a(W.hN("option",null)))
 C.Q.saQ(f,H.f(g)+": "+H.f(i.j(p,g)))
 f.value=H.Z(g)
 J.h4(e.querySelector("#maavalinta")).m(0,f)
-f.defaultSelected=f.value==="SEK"}J.a1(e.querySelector("#info"),"This app tracks the exchange rates published by the \n  European Central Bank through the Frankfurter API.\n  The data will be updated around 16:00 CET every working day.")
+f.defaultSelected=f.value==="SEK"}J.a1(e.querySelector("#info"),a)
 F.cz(q)
 e=J.h6(e.querySelector("#nappiMuunna"))
 d=e.$ti
