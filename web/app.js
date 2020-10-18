@@ -2014,7 +2014,7 @@ f=j.a(c.a(W.hN("option",null)))
 C.Q.saQ(f,H.f(g)+": "+H.f(i.j(p,g)))
 f.value=H.Z(g)
 J.h4(e.querySelector("#maavalinta")).m(0,f)
-f.defaultSelected=f.value==="SEK"}J.a1(e.querySelector("#info"),"This app tracks the exchange rates published by the \n  European Central Bank through the Frankfurter API.\n  The data is updated around 16:00 CET every working day.")
+f.defaultSelected=f.value==="SEK"}J.a1(e.querySelector("#info"),"This app tracks the exchange rates published by the \n  European Central Bank through the Frankfurter API.\n  The data will be updated around 16:00 CET every working day.")
 F.cz(q)
 e=J.h6(e.querySelector("#nappiMuunna"))
 d=e.$ti
