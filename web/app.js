@@ -1982,45 +1982,45 @@ _.c=c
 _.$ti=d},
 d_:function d_(a){this.a=a}},F={
 fG:function(){F.cy()},
-cy:function(){var t=0,s=P.ev(u.z),r,q,p,o,n,m,l,k,j,i,h,g,f,e,d,c,b
-var $async$cy=P.ew(function(a,a0){if(a===1)return P.ep(a0,s)
-while(true)switch(t){case 0:c=Date.now()
-b=T.hg("EEEE, d.M.yyyy").H(new P.a8(c,!1))
-c=document
-J.a1(c.querySelector("#date"),b)
+cy:function(){var t=0,s=P.ev(u.z),r,q,p,o,n,m,l,k,j,i,h,g,f,e,d,c
+var $async$cy=P.ew(function(a,b){if(a===1)return P.ep(b,s)
+while(true)switch(t){case 0:e=document
+d=e.querySelector("#date")
+c=Date.now()
+J.a1(d,T.hg("EEEE, d.M.yyyy").H(new P.a8(c,!1)))
 t=3
 return P.dH(F.cx("https://api.frankfurter.app/latest"),$async$cy)
-case 3:q=a0
+case 3:q=b
 if(q==null){t=1
-break}p=J.aS(q)
-o=p.j(q,"rates").gF().a2(0)
-t=4
+break}t=4
 return P.dH(F.cx("https://api.frankfurter.app/currencies"),$async$cy)
-case 4:n=a0
-if(n==null){t=1
-break}m=J.eH(p.j(q,"date"),"-")
-if(2>=m.length){r=H.l(m,2)
+case 4:p=b
+if(p==null){t=1
+break}d=J.aS(q)
+o=d.j(q,"rates").gF().a2(0)
+n=J.eH(d.j(q,"date"),"-")
+d=n.length
+if(d===3){if(2>=d){r=H.l(n,2)
 t=1
-break}l=F.fI(H.Z(m[2]))
-if(1>=m.length){r=H.l(m,1)
+break}m=F.fI(H.Z(n[2]))
+if(1>=n.length){r=H.l(n,1)
 t=1
-break}k=F.fI(H.Z(m[1]))
-if(0>=m.length){r=H.l(m,0)
+break}l=F.fI(H.Z(n[1]))
+if(0>=n.length){r=H.l(n,0)
 t=1
-break}j=m[0]
-J.a1(c.querySelector("#paivitetty"),"Updated: "+l+"."+k+"."+H.f(j))
-for(p=o.length,i=u.h,h=u.aq,g=J.aS(n),f=0;f<o.length;o.length===p||(0,H.e0)(o),++f){e=o[f]
-d=h.a(i.a(W.hN("option",null)))
-C.Q.saQ(d,H.f(e)+": "+H.f(g.j(n,e)))
-d.value=H.Z(e)
-J.h4(c.querySelector("#maavalinta")).m(0,d)
-d.defaultSelected=d.value==="SEK"}J.a1(c.querySelector("#info"),"This app tracks the exchange rates published by the \n  European Central Bank through the Frankfurter API.\n  The data is updated around 16:00 CET every working day.")
+break}k=n[0]
+J.a1(e.querySelector("#paivitetty"),"Updated: "+m+"."+l+"."+H.f(k))}for(d=o.length,c=u.h,j=u.aq,i=J.aS(p),h=0;h<o.length;o.length===d||(0,H.e0)(o),++h){g=o[h]
+f=j.a(c.a(W.hN("option",null)))
+C.Q.saQ(f,H.f(g)+": "+H.f(i.j(p,g)))
+f.value=H.Z(g)
+J.h4(e.querySelector("#maavalinta")).m(0,f)
+f.defaultSelected=f.value==="SEK"}J.a1(e.querySelector("#info"),"This app tracks the exchange rates published by the \n  European Central Bank through the Frankfurter API.\n  The data is updated around 16:00 CET every working day.")
 F.cz(q)
-c=J.h6(c.querySelector("#nappiMuunna"))
-p=c.$ti
-i=p.h("~(1)?").a(new F.dX(q))
+e=J.h6(e.querySelector("#nappiMuunna"))
+d=e.$ti
+c=d.h("~(1)?").a(new F.dX(q))
 u.Z.a(null)
-W.di(c.a,c.b,i,!1,p.c)
+W.di(e.a,e.b,c,!1,d.c)
 case 1:return P.eq(r,s)}})
 return P.er($async$cy,s)},
 cx:function(a){return F.iN(a)},

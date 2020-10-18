@@ -18,27 +18,28 @@ void main() {
 }
 
 void kaynnista() async {
-  haePaivamaara();
+  querySelector('#date').text = paivamaara();
 
   var dataKurssit = await haeSisalto('https://api.frankfurter.app/latest');
   if (dataKurssit == null) {
     return;
   }
 
-  var maalista = dataKurssit['rates'].keys.toList();
-  // print(maalista);
-
   var dataMaat = await haeSisalto('https://api.frankfurter.app/currencies');
   if (dataMaat == null) {
     return;
   }
 
+  var maalista = dataKurssit['rates'].keys.toList();
+  // print(maalista);
   var datePalat = dataKurssit['date'].split('-');
   // print(datePalat);
-  var paiva = poistaEtunolla(datePalat[2]);
-  var kk = poistaEtunolla(datePalat[1]);
-  var vuosi = datePalat[0];
-  querySelector('#paivitetty').text = 'Updated: $paiva.$kk.$vuosi';
+  if (datePalat.length == 3) {
+    var paiva = poistaEtunolla(datePalat[2]);
+    var kk = poistaEtunolla(datePalat[1]);
+    var vuosi = datePalat[0];
+    querySelector('#paivitetty').text = 'Updated: $paiva.$kk.$vuosi';
+  }
 
   for (var maakoodi in maalista) {
     OptionElement elementti = Element.option();
@@ -48,7 +49,7 @@ void kaynnista() async {
     elementti.defaultSelected = elementti.value == 'SEK';
   }
 
-  naytaInfoTexti();
+  querySelector('#info').text = infoteksti();
   muunna(dataKurssit);
 
   querySelector('#nappiMuunna').onClick.listen((e) {
@@ -68,19 +69,17 @@ Future haeSisalto(osoite) async {
   }
 }
 
-void haePaivamaara() {
+String paivamaara() {
   var now = DateTime.now();
   var formatter = DateFormat('EEEE, d.M.yyyy');
-  var formatted = formatter.format(now);
-  querySelector('#date').text = formatted;
+  return formatter.format(now);
 }
 
-void naytaInfoTexti() {
-  var infoText = '''This app tracks the exchange rates published by the 
+String infoteksti() {
+  var teksti = '''This app tracks the exchange rates published by the 
   European Central Bank through the Frankfurter API.
   The data is updated around 16:00 CET every working day.''';
-
-  querySelector('#info').text = infoText;
+  return teksti;
 }
 
 String poistaEtunolla(String mjono) {
