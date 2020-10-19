@@ -26,34 +26,36 @@ void kaynnista(info) async {
   var dataKurssit = await haeSisalto('https://api.frankfurter.app/latest');
   var dataMaat = await haeSisalto('https://api.frankfurter.app/currencies');
 
-  if (dataKurssit.isEmpty || dataMaat.isEmpty) {
-    return;
-  }
+  if (dataKurssit.isNotEmpty && dataMaat.isNotEmpty) {
+    var maalista = dataKurssit['rates'].keys.toList();
 
-  var maalista = dataKurssit['rates'].keys.toList();
-  // print(maalista);
-  var datePalat = dataKurssit['date'].split('-');
-  // print(datePalat);
-  if (datePalat.length == 3) {
-    var paiva = poistaEtunolla(datePalat[2]);
-    var kk = poistaEtunolla(datePalat[1]);
-    var vuosi = datePalat[0];
-    querySelector('#paivitetty').text = 'Updated: $paiva.$kk.$vuosi';
-  }
+    var datePalat = dataKurssit['date'].split('-');
+    // print(datePalat);
+    if (datePalat.length == 3) {
+      var paiva = poistaEtunolla(datePalat[2]);
+      var kk = poistaEtunolla(datePalat[1]);
+      var vuosi = datePalat[0];
+      querySelector('#paivitetty').text = 'Updated: $paiva.$kk.$vuosi';
+    }
 
-  for (var maakoodi in maalista) {
-    OptionElement elementti = Element.option();
-    elementti.text = '$maakoodi: ${dataMaat[maakoodi]}';
-    elementti.value = maakoodi;
-    querySelector('#maavalinta').children.add(elementti);
-    elementti.defaultSelected = elementti.value == 'SEK';
-  }
+    for (var maakoodi in maalista) {
+      OptionElement elementti = Element.option();
+      elementti.text = '$maakoodi: ${dataMaat[maakoodi]}';
+      elementti.value = maakoodi;
+      querySelector('#maavalinta').children.add(elementti);
+      elementti.defaultSelected = elementti.value == 'SEK';
+    }
 
-  querySelector('#info').text = info;
-  muunna(dataKurssit);
+    querySelector('#info').text = info;
+    muunna(dataKurssit);
+  } else {
+    dataKurssit.clear();
+  }
 
   querySelector('#nappiMuunna').onClick.listen((e) {
-    muunna(dataKurssit);
+    if (dataKurssit.isNotEmpty) {
+      muunna(dataKurssit);
+    }
   });
 }
 
