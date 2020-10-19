@@ -24,12 +24,9 @@ void kaynnista(info) async {
   querySelector('#date').text = paivamaara();
 
   var dataKurssit = await haeSisalto('https://api.frankfurter.app/latest');
-  if (dataKurssit == null) {
-    return;
-  }
-
   var dataMaat = await haeSisalto('https://api.frankfurter.app/currencies');
-  if (dataMaat == null) {
+
+  if (dataKurssit.isEmpty || dataMaat.isEmpty) {
     return;
   }
 
@@ -61,15 +58,16 @@ void kaynnista(info) async {
 }
 
 Future haeSisalto(osoite) async {
+  var sisalto = {};
   try {
     // Make the GET request
     var jsonString = await HttpRequest.getString(osoite);
-    // print(jsonDecode(jsonString));
-    return jsonDecode(jsonString);
+    sisalto = jsonDecode(jsonString);
   } catch (e) {
     // The GET request failed. Handle the error.
     querySelector('#info').text = 'Request failed. Couldn\'t open $osoite';
   }
+  return sisalto;
 }
 
 String paivamaara() {
@@ -87,7 +85,6 @@ String poistaEtunolla(String mjono) {
   if (int.parse(mjono[0]) == 0 && mjono.length == 2) {
     return mjono[1].toString();
   }
-
   return mjono;
 }
 
