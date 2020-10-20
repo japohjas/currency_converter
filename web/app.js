@@ -2057,7 +2057,7 @@ t=1
 break}k=n[0]
 J.a3(e.querySelector("#paivitetty"),"Updated: "+m+"."+l+"."+H.f(k))}for(d=o.length,c=u.h,j=u.aq,i=J.a9(p),h=0;h<o.length;o.length===d||(0,H.cN)(o),++h){g=o[h]
 f=j.a(c.a(W.i9("option",null)))
-C.Q.saY(f,H.f(g)+": "+H.f(i.l(p,g)))
+C.Q.saY(f,H.f(g)+" - "+H.f(i.l(p,g)))
 f.value=H.a0(g)
 J.hn(e.querySelector("#maavalinta")).p(0,f)
 f.defaultSelected=f.value==="SEK"}J.a3(e.querySelector("#info"),a)
