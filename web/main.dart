@@ -40,7 +40,7 @@ void kaynnista(info) async {
 
     for (var maakoodi in maalista) {
       OptionElement elementti = Element.option();
-      elementti.text = '$maakoodi: ${dataMaat[maakoodi]}';
+      elementti.text = '$maakoodi - ${dataMaat[maakoodi]}';
       elementti.value = maakoodi;
       querySelector('#maavalinta').children.add(elementti);
       elementti.defaultSelected = elementti.value == 'SEK';
