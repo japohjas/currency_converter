@@ -34,6 +34,10 @@ html, body {
   margin: 0.4rem;
 }
 
+#kantavalinta:hover {
+  background-color: white;
+}
+
 #maavalinta:hover {
   background-color: white;
 }
