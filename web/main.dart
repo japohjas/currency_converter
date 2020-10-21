@@ -31,7 +31,6 @@ void kaynnista(info) async {
     var maalista = dataKurssit['rates'].keys.toList();
 
     var datePalat = dataKurssit['date'].split('-');
-    // print(datePalat);
     if (datePalat.length == 3) {
       var paiva = poistaEtunolla(datePalat[2]);
       var kk = poistaEtunolla(datePalat[1]);
@@ -39,31 +38,8 @@ void kaynnista(info) async {
       querySelector('#paivitetty').text = 'Updated: $paiva.$kk.$vuosi';
     }
 
-    OptionElement kanta = Element.option();
-    kanta.text = 'EUR - Euro';
-    kanta.value = 'EUR';
-    querySelector('#kantavalinta').children.add(kanta);
-
-    for (var maakoodi in maalista) {
-      OptionElement elementti = Element.option();
-      elementti.text = '$maakoodi - ${dataMaat[maakoodi]}';
-      elementti.value = maakoodi;
-      querySelector('#kantavalinta').children.add(elementti);
-      elementti.defaultSelected = elementti.value == 'EUR';
-    }
-
-    OptionElement maa = Element.option();
-    maa.text = 'EUR - Euro';
-    maa.value = 'EUR';
-    querySelector('#maavalinta').children.add(maa);
-
-    for (var maakoodi in maalista) {
-      OptionElement elementti = Element.option();
-      elementti.text = '$maakoodi - ${dataMaat[maakoodi]}';
-      elementti.value = maakoodi;
-      querySelector('#maavalinta').children.add(elementti);
-      elementti.defaultSelected = elementti.value == 'SEK';
-    }
+    teeValinnat('#kantavalinta', maalista, dataMaat, 'EUR');
+    teeValinnat('#maavalinta', maalista, dataMaat, 'SEK');
 
     querySelector('#info').text = info;
     muunna(dataKurssit);
@@ -76,6 +52,21 @@ void kaynnista(info) async {
       muunna(dataKurssit);
     }
   });
+}
+
+void teeValinnat(htmlId, maalista, dataMaat, oletusValuutta) {
+  OptionElement elementti = Element.option();
+  elementti.text = 'EUR - Euro';
+  elementti.value = 'EUR';
+  querySelector(htmlId).children.add(elementti);
+
+  for (var maakoodi in maalista) {
+    OptionElement elm = Element.option();
+    elm.text = '$maakoodi - ${dataMaat[maakoodi]}';
+    elm.value = maakoodi;
+    querySelector(htmlId).children.add(elm);
+    elm.defaultSelected = elm.value == oletusValuutta;
+  }
 }
 
 Future haeSisalto(osoite) async {
@@ -115,9 +106,7 @@ void muunna(data) async {
   var kantaKurssi = 1.0;
   if (kantavaluutta != 'EUR') {
     kantaKurssi = data['rates'][kantavaluutta];
-    // kantaKurssi = 0;
   }
-  // print(kantaKurssi);
 
   SelectElement kohde = querySelector('#maavalinta');
   var valuutta = kohde.value;
@@ -125,14 +114,15 @@ void muunna(data) async {
   if (valuutta != 'EUR') {
     kurssi = data['rates'][valuutta];
   }
-  // print(kurssi);
-  if (kantaKurssi == 0) {
-    kantaKurssi = -1;
+
+  if (kantaKurssi == 0 || kurssi == 0) {
+    kantaKurssi = 1;
     kantavaluutta = 'nan';
+    kurssi = 1;
     valuutta = 'nan';
   }
 
-  var muuntokerroin = kurssi / kantaKurssi;
+  var muuntokerroin = kurssi / kantaKurssi * 1.0;
 
   InputElement input = querySelector('#syote');
   var syote = 0.0;
