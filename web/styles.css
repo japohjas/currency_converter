@@ -27,11 +27,11 @@ html, body {
   margin-right: 1.2rem;
 }
 
-#maavalinta { 
-  font-size: 1.2rem;
+#maavalinta, #kantavalinta { 
+  font-size: 1rem;
   background-color: rgb(186, 243, 243);
   padding: 0.2rem;
-  margin: 1.2rem;
+  margin: 0.4rem;
 }
 
 #maavalinta:hover {
@@ -43,6 +43,7 @@ html, body {
   width: 8rem;
   padding: 0.2rem;
   margin-right: 0.5rem;
+  margin-top: 1rem;
   margin-bottom: 1rem;
   background-color: rgb(186, 243, 243);
 }

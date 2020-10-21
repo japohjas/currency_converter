@@ -11,6 +11,7 @@ https://stackoverflow.com/questions/16126579/how-do-i-format-a-date-with-dart
 https://pub.dev/documentation/intl/latest/intl/NumberFormat-class.html
 https://dart.dev/codelabs/async-await      // Future.delayed
 18.10.2020 lisätty: try catch
+21.10.2020 lisätty vaihdettava kantavaluutta
 */
 
 void main() {
@@ -37,6 +38,24 @@ void kaynnista(info) async {
       var vuosi = datePalat[0];
       querySelector('#paivitetty').text = 'Updated: $paiva.$kk.$vuosi';
     }
+
+    OptionElement kanta = Element.option();
+    kanta.text = 'EUR - Euro';
+    kanta.value = 'EUR';
+    querySelector('#kantavalinta').children.add(kanta);
+
+    for (var maakoodi in maalista) {
+      OptionElement elementti = Element.option();
+      elementti.text = '$maakoodi - ${dataMaat[maakoodi]}';
+      elementti.value = maakoodi;
+      querySelector('#kantavalinta').children.add(elementti);
+      elementti.defaultSelected = elementti.value == 'EUR';
+    }
+
+    OptionElement maa = Element.option();
+    maa.text = 'EUR - Euro';
+    maa.value = 'EUR';
+    querySelector('#maavalinta').children.add(maa);
 
     for (var maakoodi in maalista) {
       OptionElement elementti = Element.option();
@@ -91,10 +110,29 @@ String poistaEtunolla(String mjono) {
 }
 
 void muunna(data) async {
-  SelectElement kohdemaa = querySelector('#maavalinta');
-  var valuutta = kohdemaa.value;
-  var muuntokerroin = data['rates'][valuutta];
-  var perusvaluutta = data['base'];
+  SelectElement kanta = querySelector('#kantavalinta');
+  var kantavaluutta = kanta.value;
+  var kantaKurssi = 1.0;
+  if (kantavaluutta != 'EUR') {
+    kantaKurssi = data['rates'][kantavaluutta];
+    // kantaKurssi = 0;
+  }
+  // print(kantaKurssi);
+
+  SelectElement kohde = querySelector('#maavalinta');
+  var valuutta = kohde.value;
+  var kurssi = 1.0;
+  if (valuutta != 'EUR') {
+    kurssi = data['rates'][valuutta];
+  }
+  // print(kurssi);
+  if (kantaKurssi == 0) {
+    kantaKurssi = -1;
+    kantavaluutta = 'nan';
+    valuutta = 'nan';
+  }
+
+  var muuntokerroin = kurssi / kantaKurssi;
 
   InputElement input = querySelector('#syote');
   var syote = 0.0;
@@ -115,12 +153,12 @@ void muunna(data) async {
   var tulosJako = syote / muuntokerroin * 1.0;
   var tarkka = syote == 1;
 
-  querySelector('#solu1').text = '${format(syote, tarkka)} $perusvaluutta';
+  querySelector('#solu1').text = '${format(syote, tarkka)} $kantavaluutta';
   querySelector('#solu2').text = '=';
   querySelector('#solu3').text = '${format(tulosKerto, tarkka)} $valuutta';
   querySelector('#solu4').text = '${format(syote, tarkka)} $valuutta';
   querySelector('#solu5').text = '=';
-  querySelector('#solu6').text = '${format(tulosJako, tarkka)} $perusvaluutta';
+  querySelector('#solu6').text = '${format(tulosJako, tarkka)} $kantavaluutta';
 }
 
 String format(double luku, bool tarkkaArvo) {
