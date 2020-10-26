@@ -2029,7 +2029,7 @@ _.b=b
 _.c=c
 _.$ti=d},
 da:function da(a){this.a=a}},F={
-fW:function(){F.cM("This app tracks the exchange rates published by the \n  European Central Bank through the Frankfurter API.\n  The data is updated around 16:00 CET every working day.")},
+fW:function(){F.cM("This app tracks the exchange rates published by the \n  European Central Bank, the app built with Frankfurter.\n  The data is updated around 16:00 CET every working day.")},
 cM:function(a){var t=0,s=P.eH(u.z),r,q,p,o,n,m,l,k,j,i,h
 var $async$cM=P.eI(function(b,c){if(b===1)return P.eB(c,s)
 while(true)switch(t){case 0:j=document
