@@ -16,7 +16,7 @@ https://dart.dev/codelabs/async-await      // Future.delayed
 
 void main() {
   var info = '''This app tracks the exchange rates published by the 
-  European Central Bank through the Frankfurter API.
+  European Central Bank, the app built with Frankfurter.
   The data is updated around 16:00 CET every working day.''';
   kaynnista(info);
 }
