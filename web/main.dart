@@ -18,43 +18,43 @@ void main() {
   var info = '''This app tracks the exchange rates published by the 
   European Central Bank, the app built with Frankfurter.
   The data is updated around 16:00 CET every working day.''';
-  kaynnista(info);
+  _kaynnista(info);
 }
 
-void kaynnista(info) async {
-  querySelector('#date').text = paivamaara();
+void _kaynnista(info) async {
+  querySelector('#date').text = _paivamaara();
 
-  var dataKurssit = await haeSisalto('https://api.frankfurter.app/latest');
-  var dataMaat = await haeSisalto('https://api.frankfurter.app/currencies');
+  var dataKurssit = await _haeSisalto('https://api.frankfurter.app/latest');
+  var dataMaat = await _haeSisalto('https://api.frankfurter.app/currencies');
 
   if (dataKurssit.isNotEmpty && dataMaat.isNotEmpty) {
     var maalista = dataKurssit['rates'].keys.toList();
 
     var datePalat = dataKurssit['date'].split('-');
     if (datePalat.length == 3) {
-      var paiva = poistaEtunolla(datePalat[2]);
-      var kk = poistaEtunolla(datePalat[1]);
+      var paiva = _poistaEtunolla(datePalat[2]);
+      var kk = _poistaEtunolla(datePalat[1]);
       var vuosi = datePalat[0];
       querySelector('#paivitetty').text = 'Updated: $paiva.$kk.$vuosi';
     }
 
-    teeValinnat('#kantavalinta', maalista, dataMaat, 'EUR');
-    teeValinnat('#maavalinta', maalista, dataMaat, 'SEK');
+    _teeValinnat('#kantavalinta', maalista, dataMaat, 'EUR');
+    _teeValinnat('#maavalinta', maalista, dataMaat, 'SEK');
 
     querySelector('#info').text = info;
-    muunna(dataKurssit);
+    _muunna(dataKurssit);
   } else {
     dataKurssit.clear();
   }
 
   querySelector('#nappiMuunna').onClick.listen((e) {
     if (dataKurssit.isNotEmpty) {
-      muunna(dataKurssit);
+      _muunna(dataKurssit);
     }
   });
 }
 
-void teeValinnat(htmlId, maalista, dataMaat, oletusValuutta) {
+void _teeValinnat(htmlId, maalista, dataMaat, oletusValuutta) {
   OptionElement elementti = Element.option();
   elementti.text = 'EUR - Euro';
   elementti.value = 'EUR';
@@ -69,7 +69,7 @@ void teeValinnat(htmlId, maalista, dataMaat, oletusValuutta) {
   }
 }
 
-Future haeSisalto(osoite) async {
+Future _haeSisalto(osoite) async {
   var sisalto = {};
   try {
     // Make the GET request
@@ -82,13 +82,13 @@ Future haeSisalto(osoite) async {
   return sisalto;
 }
 
-String paivamaara() {
+String _paivamaara() {
   var now = DateTime.now();
   var formatter = DateFormat('EEEE, d.M.yyyy');
   return formatter.format(now);
 }
 
-String poistaEtunolla(String mjono) {
+String _poistaEtunolla(String mjono) {
   if (mjono.isEmpty) {
     return '';
   }
@@ -100,7 +100,7 @@ String poistaEtunolla(String mjono) {
   return mjono;
 }
 
-void muunna(data) async {
+void _muunna(data) async {
   SelectElement kanta = querySelector('#kantavalinta');
   var kantavaluutta = kanta.value;
   var kantaKurssi = 1.0;
@@ -143,15 +143,15 @@ void muunna(data) async {
   var tulosJako = syote / muuntokerroin * 1.0;
   var tarkka = syote == 1;
 
-  querySelector('#solu1').text = '${format(syote, tarkka)} $kantavaluutta';
+  querySelector('#solu1').text = '${_format(syote, tarkka)} $kantavaluutta';
   querySelector('#solu2').text = '=';
-  querySelector('#solu3').text = '${format(tulosKerto, tarkka)} $valuutta';
-  querySelector('#solu4').text = '${format(syote, tarkka)} $valuutta';
+  querySelector('#solu3').text = '${_format(tulosKerto, tarkka)} $valuutta';
+  querySelector('#solu4').text = '${_format(syote, tarkka)} $valuutta';
   querySelector('#solu5').text = '=';
-  querySelector('#solu6').text = '${format(tulosJako, tarkka)} $kantavaluutta';
+  querySelector('#solu6').text = '${_format(tulosJako, tarkka)} $kantavaluutta';
 }
 
-String format(double luku, bool tarkkaArvo) {
+String _format(double luku, bool tarkkaArvo) {
   if (tarkkaArvo) {
     var f = NumberFormat('##0.00###', 'en_US');
     var u = f.format(luku);
