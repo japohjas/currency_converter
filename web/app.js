@@ -2167,7 +2167,7 @@ q=J.eX(r,",")
 if(q.length===0){if(0>=s)return H.l(t,0)
 r=H.f(r)+","
 if(1>=s)return H.l(t,1)
-return r+H.f(t[1])}for(p="",o=0;s=q.length,r=s-1,o<r;++o)p+=J.ee(q[o],".")
+return r+H.f(t[1])}for(p="",o=0;s=q.length,r=s-1,o<r;++o)p+=J.ee(q[o]," ")
 if(r<0)return H.l(q,r)
 s=C.a.v(p,q[r])+","
 if(1>=t.length)return H.l(t,1)
