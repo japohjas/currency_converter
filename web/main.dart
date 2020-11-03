@@ -170,7 +170,7 @@ String _format(double luku, bool tarkkaArvo) {
 
   var mjono = '';
   for (var i = 0; i < palat2.length - 1; i++) {
-    mjono += palat2[i] + '.';
+    mjono += palat2[i] + ' ';
   }
 
   mjono += palat2[palat2.length - 1];
