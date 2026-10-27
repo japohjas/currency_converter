@@ -23,8 +23,8 @@ void _kaynnista(String info) async {
   if (dateEl != null) dateEl.innerText = _paivamaara();
 
   // Haetaan tiedot uudesta toimivasta api.frankfurter.dev -osoitteesta
-  var dataKurssit = await _haeSisalto('https://frankfurter.dev');
-  var dataMaat = await _haeSisalto('https://frankfurter.dev');
+  var dataKurssit = await _haeSisalto('https://api.frankfurter.dev/v1/latest');
+  var dataMaat = await _haeSisalto('https://api.frankfurter.dev/v1/currencies');
 
   if (dataKurssit.isNotEmpty && dataMaat.isNotEmpty) {
     var maalista = (dataKurssit['rates'] as Map).keys.toList();
