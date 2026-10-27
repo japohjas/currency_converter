@@ -1,85 +1,90 @@
-import 'dart:html';
 import 'dart:convert';
-import 'package:intl/intl.dart'; // päivämäärä
+import 'package:web/web.dart' as web; // Korvaa vanhan 'dart:html' -kirjaston
+import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http; // Korvaa vanhan HttpRequestin
 
-/*
-29.9.2020 Jari Pohjasmäki japohjas@gmail.com
-This app built with Frankfurter API
-https://www.frankfurter.app/docs/
-https://pub.dev/packages/intl
-https://stackoverflow.com/questions/16126579/how-do-i-format-a-date-with-dart
-https://pub.dev/documentation/intl/latest/intl/NumberFormat-class.html
-https://dart.dev/codelabs/async-await      // Future.delayed
-18.10.2020 lisätty: try catch
-21.10.2020 lisätty vaihdettava kantavaluutta
+/* 
+  Päivitetty moderniin Dart-web-standardiin (package:web & package:http).
+  Toimii suoraan olemassa olevan HTML-rakenteesi kanssa.
 */
 
 void main() {
-  var info = '''This app tracks the exchange rates published by the 
-  European Central Bank, the app built with Frankfurter.
-  The data is updated around 16:00 CET every working day.''';
+  var info = '''This app tracks the exchange rates published by the European Central Bank, the app built with Frankfurter. The data is updated around 16:00 CET every working day.''';
   _kaynnista(info);
 }
 
-void _kaynnista(info) async {
-  querySelector('#date').text = _paivamaara();
+void _kaynnista(String info) async {
+  // Etsitään HTML-elementit uuden standardin mukaisesti
+  final dateEl = web.document.querySelector('#date') as web.HTMLParagraphElement?;
+  final paivitettyEl = web.document.querySelector('#paivitetty') as web.HTMLParagraphElement?;
+  final infoEl = web.document.querySelector('#info') as web.HTMLParagraphElement?;
+  final nappiMuunna = web.document.querySelector('#nappiMuunna') as web.HTMLButtonElement?;
 
-  var dataKurssit = await _haeSisalto('https://api.frankfurter.app/latest');
-  var dataMaat = await _haeSisalto('https://api.frankfurter.app/currencies');
+  if (dateEl != null) dateEl.innerText = _paivamaara();
+
+  // Haetaan tiedot uudesta toimivasta api.frankfurter.dev -osoitteesta
+  var dataKurssit = await _haeSisalto('https://frankfurter.dev');
+  var dataMaat = await _haeSisalto('https://frankfurter.dev');
 
   if (dataKurssit.isNotEmpty && dataMaat.isNotEmpty) {
-    var maalista = dataKurssit['rates'].keys.toList();
+    var maalista = (dataKurssit['rates'] as Map).keys.toList();
+    var datePalat = (dataKurssit['date'] as String).split('-');
 
-    var datePalat = dataKurssit['date'].split('-');
-    if (datePalat.length == 3) {
+    if (datePalat.length == 3 && paivitettyEl != null) {
       var paiva = _poistaEtunolla(datePalat[2]);
       var kk = _poistaEtunolla(datePalat[1]);
       var vuosi = datePalat[0];
-      querySelector('#paivitetty').text = 'Updated: $paiva.$kk.$vuosi';
+      paivitettyEl.innerText = 'Updated: $paiva.$kk.$vuosi';
     }
 
     _teeValinnat('#kantavalinta', maalista, dataMaat, 'EUR');
     _teeValinnat('#maavalinta', maalista, dataMaat, 'SEK');
-
-    querySelector('#info').text = info;
+    
+    if (infoEl != null) infoEl.innerText = info;
     _muunna(dataKurssit);
   } else {
     dataKurssit.clear();
   }
 
-  querySelector('#nappiMuunna').onClick.listen((e) {
+  nappiMuunna?.onClick.listen((e) {
     if (dataKurssit.isNotEmpty) {
       _muunna(dataKurssit);
     }
   });
 }
 
-void _teeValinnat(htmlId, maalista, dataMaat, oletusValuutta) {
-  OptionElement elementti = Element.option();
+void _teeValinnat(String htmlId, List maalista, Map dataMaat, String oletusValuutta) {
+  final valintaElementti = web.document.querySelector(htmlId) as web.HTMLSelectElement?;
+  if (valintaElementti == null) return;
+
+  final elementti = web.document.createElement('option') as web.HTMLOptionElement;
   elementti.text = 'EUR - Euro';
   elementti.value = 'EUR';
-  querySelector(htmlId).children.add(elementti);
+  valintaElementti.appendChild(elementti);
 
   for (var maakoodi in maalista) {
-    OptionElement elm = Element.option();
+    final elm = web.document.createElement('option') as web.HTMLOptionElement;
     elm.text = '$maakoodi - ${dataMaat[maakoodi]}';
-    elm.value = maakoodi;
-    querySelector(htmlId).children.add(elm);
+    elm.value = maakoodi.toString();
+    valintaElementti.appendChild(elm);
     elm.defaultSelected = elm.value == oletusValuutta;
   }
 }
 
-Future _haeSisalto(osoite) async {
-  var sisalto = {};
+Future<Map<String, dynamic>> _haeSisalto(String osoite) async {
   try {
-    // Make the GET request
-    var jsonString = await HttpRequest.getString(osoite);
-    sisalto = jsonDecode(jsonString);
+    final response = await http.get(Uri.parse(osoite));
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body) as Map<String, dynamic>;
+    } else {
+      final infoEl = web.document.querySelector('#info') as web.HTMLParagraphElement?;
+      if (infoEl != null) infoEl.innerText = 'Server error: ${response.statusCode}';
+    }
   } catch (e) {
-    // The GET request failed. Handle the error.
-    querySelector('#info').text = 'Request failed. Couldn\'t open $osoite';
+    final infoEl = web.document.querySelector('#info') as web.HTMLParagraphElement?;
+    if (infoEl != null) infoEl.innerText = 'Request failed. Couldn\'t open $osoite';
   }
-  return sisalto;
+  return {};
 }
 
 String _paivamaara() {
@@ -89,30 +94,31 @@ String _paivamaara() {
 }
 
 String _poistaEtunolla(String mjono) {
-  if (mjono.isEmpty) {
-    return '';
-  }
-
+  if (mjono.isEmpty) return '';
   mjono = mjono.trim();
-  if (int.parse(mjono[0]) == 0 && mjono.length == 2) {
-    return mjono[1].toString();
+  if (mjono.length == 2 && mjono.startsWith('0')) {
+    return mjono[1];
   }
   return mjono;
 }
 
-void _muunna(data) async {
-  SelectElement kanta = querySelector('#kantavalinta');
+void _muunna(Map<String, dynamic> data) async {
+  final kanta = web.document.querySelector('#kantavalinta') as web.HTMLSelectElement?;
+  final kohde = web.document.querySelector('#maavalinta') as web.HTMLSelectElement?;
+  final input = web.document.querySelector('#syote') as web.HTMLInputElement?;
+
+  if (kanta == null || kohde == null || input == null) return;
+
   var kantavaluutta = kanta.value;
   var kantaKurssi = 1.0;
   if (kantavaluutta != 'EUR') {
-    kantaKurssi = data['rates'][kantavaluutta];
+    kantaKurssi = (data['rates'][kantavaluutta] as num).toDouble();
   }
 
-  SelectElement kohde = querySelector('#maavalinta');
   var valuutta = kohde.value;
   var kurssi = 1.0;
   if (valuutta != 'EUR') {
-    kurssi = data['rates'][valuutta];
+    kurssi = (data['rates'][valuutta] as num).toDouble();
   }
 
   if (kantaKurssi == 0 || kurssi == 0) {
@@ -122,57 +128,49 @@ void _muunna(data) async {
     valuutta = 'nan';
   }
 
-  var muuntokerroin = kurssi / kantaKurssi * 1.0;
-
-  InputElement input = querySelector('#syote');
+  var muuntokerroin = kurssi / kantaKurssi;
   var syote = 0.0;
 
   if (input.value.isEmpty) {
     syote = -1.0;
   } else {
-    syote = double.parse(input.value);
+    syote = double.tryParse(input.value) ?? -1.0;
   }
 
   if (syote < 0 || syote > 99999999999.99) {
     input.style.color = 'red';
-    await Future.delayed(Duration(milliseconds: 600),
-        () => {input.style.color = 'black', input.value = '1', syote = 1.0});
+    await Future.delayed(const Duration(milliseconds: 600));
+    input.style.color = 'black';
+    input.value = '1';
+    syote = 1.0;
   }
 
-  var tulosKerto = syote * muuntokerroin * 1.0;
-  var tulosJako = syote / muuntokerroin * 1.0;
+  var tulosKerto = syote * muuntokerroin;
+  var tulosJako = syote / muuntokerroin;
   var tarkka = syote == 1;
 
-  querySelector('#solu1').text = '${_format(syote, tarkka)} $kantavaluutta';
-  querySelector('#solu2').text = '=';
-  querySelector('#solu3').text = '${_format(tulosKerto, tarkka)} $valuutta';
-  querySelector('#solu4').text = '${_format(syote, tarkka)} $valuutta';
-  querySelector('#solu5').text = '=';
-  querySelector('#solu6').text = '${_format(tulosJako, tarkka)} $kantavaluutta';
+  // Haetaan taulukon solut tekstin tulostusta varten
+  final s1 = web.document.querySelector('#solu1') as web.HTMLTableCellElement?;
+  final s2 = web.document.querySelector('#solu2') as web.HTMLTableCellElement?;
+  final s3 = web.document.querySelector('#solu3') as web.HTMLTableCellElement?;
+  final s4 = web.document.querySelector('#solu4') as web.HTMLTableCellElement?;
+  final s5 = web.document.querySelector('#solu5') as web.HTMLTableCellElement?;
+  final s6 = web.document.querySelector('#solu6') as web.HTMLTableCellElement?;
+
+  if (s1 != null) s1.innerText = '${_format(syote, tarkka)} $kantavaluutta';
+  if (s2 != null) s2.innerText = '=';
+  if (s3 != null) s3.innerText = '${_format(tulosKerto, tarkka)} $valuutta';
+  if (s4 != null) s4.innerText = '${_format(syote, tarkka)} $valuutta';
+  if (s5 != null) s5.innerText = '=';
+  if (s6 != null) s6.innerText = '${_format(tulosJako, tarkka)} $kantavaluutta';
 }
 
 String _format(double luku, bool tarkkaArvo) {
+  // Käytetään suomalaista muotoilua 'fi_FI', jotta luvut tulostuvat automaattisesti pilkulla
   if (tarkkaArvo) {
-    var f = NumberFormat('##0.00###', 'en_US');
-    var u = f.format(luku);
-    var palat = u.split('.');
-    return '${palat[0]},${palat[1]}';
+    var f = NumberFormat('##0.00###', 'fi_FI');
+    return f.format(luku);
   }
-
-  var f = NumberFormat('#,##0.00', 'en_US');
-  var u = f.format(luku);
-  var palat = u.split('.');
-  var palat2 = palat[0].split(',');
-
-  if (palat2.isEmpty) {
-    return '${palat[0]},${palat[1]}';
-  }
-
-  var mjono = '';
-  for (var i = 0; i < palat2.length - 1; i++) {
-    mjono += palat2[i] + ' ';
-  }
-
-  mjono += palat2[palat2.length - 1];
-  return '$mjono,${palat[1]}';
+  var f = NumberFormat('#,##0.00', 'fi_FI');
+  return f.format(luku);
 }
