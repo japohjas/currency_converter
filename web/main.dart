@@ -13,7 +13,7 @@ void main() async {
   // Alustetaan suomen kielen tuki ennen sovelluksen käynnistystä
   await initializeDateFormatting('fi_FI', null);
 
-  var tiedot = '''Tämä sovellus seuraa Euroopan keskuspankin julkaisemia valuuttakursseja. Sovellus on rakennettu Frankfurter API:n avulla. Tiedot päivitetään jokaisena työpäivänä noin klo 16:00 CET.''';
+  var tiedot = '''Sovellus seuraa Euroopan keskuspankin julkaisemia valuuttakursseja. Tiedot päivitetään jokaisena työpäivänä noin klo 16:00 CET. (api.frankfurter.dev/v1)''';
   _kaynnista(tiedot);
 }
 
