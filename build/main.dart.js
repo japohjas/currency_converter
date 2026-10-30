@@ -3515,7 +3515,7 @@ for(;;)switch(s){case 0:if($.eS() instanceof B.bR){$.ny=B.oy()
 $.eQ=$.eO=null}if($.iB() instanceof B.bR)$.ox=B.ow()
 s=2
 return B.ae(B.jD(null,t.H),$async$ip)
-case 2:B.eM("T\xe4m\xe4 sovellus seuraa Euroopan keskuspankin julkaisemia valuuttakursseja. Sovellus on rakennettu Frankfurter API:n avulla. Tiedot p\xe4ivitet\xe4\xe4n jokaisena ty\xf6p\xe4iv\xe4n\xe4 noin klo 16:00 CET.")
+case 2:B.eM("Sovellus seuraa Euroopan keskuspankin julkaisemia valuuttakursseja. Tiedot p\xe4ivitet\xe4\xe4n jokaisena ty\xf6p\xe4iv\xe4n\xe4 noin klo 16:00 CET. (api.frankfurter.dev/v1)")
 return B.aR(null,r)}})
 return B.aS($async$ip,r)},
 eM(a){var s=0,r=B.aU(t.H),q,p,o,n,m,l,k,j,i,h
