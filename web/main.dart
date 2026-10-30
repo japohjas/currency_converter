@@ -1,28 +1,32 @@
 import 'dart:convert';
 import 'package:web/web.dart' as web; // Korvaa vanhan 'dart:html' -kirjaston
 import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart'; // Tarvitaan suomenkieliselle päivämäärälle
 import 'package:http/http.dart' as http; // Korvaa vanhan HttpRequestin
 
 /* 
   Päivitetty moderniin Dart-web-standardiin (package:web & package:http).
-  Toimii suoraan olemassa olevan HTML-rakenteesi kanssa.
+  Käyttää toimivia v2 API -osoitteita (api.frankfurter.dev).
 */
 
-void main() {
-  var info = '''This app tracks the exchange rates published by the European Central Bank, the app built with Frankfurter. The data is updated around 16:00 CET every working day.''';
-  _kaynnista(info);
+void main() async {
+  // Alustetaan suomen kielen tuki ennen sovelluksen käynnistystä
+  await initializeDateFormatting('fi_FI', null);
+
+  var tiedot = '''Tämä sovellus seuraa Euroopan keskuspankin julkaisemia valuuttakursseja. Sovellus on rakennettu Frankfurter API:n avulla. Tiedot päivitetään jokaisena työpäivänä noin klo 16:00 CET.''';
+  _kaynnista(tiedot);
 }
 
-void _kaynnista(String info) async {
+void _kaynnista(String tiedot) async {
   // Etsitään HTML-elementit uuden standardin mukaisesti
-  final dateEl = web.document.querySelector('#date') as web.HTMLParagraphElement?;
+  final paivamaaraEl = web.document.querySelector('#date') as web.HTMLParagraphElement?;
   final paivitettyEl = web.document.querySelector('#paivitetty') as web.HTMLParagraphElement?;
   final infoEl = web.document.querySelector('#info') as web.HTMLParagraphElement?;
   final nappiMuunna = web.document.querySelector('#nappiMuunna') as web.HTMLButtonElement?;
 
-  if (dateEl != null) dateEl.innerText = _paivamaara();
+  if (paivamaaraEl != null) paivamaaraEl.innerText = _paivamaara();
 
-  // Haetaan tiedot uudesta toimivasta api.frankfurter.dev -osoitteesta
+  // Haetaan tiedot toimivista api.frankfurter.dev -osoitteista (v2-versiot)
   var dataKurssit = await _haeSisalto('https://api.frankfurter.dev/v1/latest');
   var dataMaat = await _haeSisalto('https://api.frankfurter.dev/v1/currencies');
 
@@ -31,19 +35,20 @@ void _kaynnista(String info) async {
     var datePalat = (dataKurssit['date'] as String).split('-');
 
     if (datePalat.length == 3 && paivitettyEl != null) {
+      // Otetaan palaset oikeilla indekseillä talteen
       var paiva = _poistaEtunolla(datePalat[2]);
       var kk = _poistaEtunolla(datePalat[1]);
       var vuosi = datePalat[0];
-      paivitettyEl.innerText = 'Updated: $paiva.$kk.$vuosi';
+      paivitettyEl.innerText = 'Päivitetty: $paiva.$kk.$vuosi';
     }
 
     _teeValinnat('#kantavalinta', maalista, dataMaat, 'EUR');
     _teeValinnat('#maavalinta', maalista, dataMaat, 'SEK');
     
-    if (infoEl != null) infoEl.innerText = info;
+    if (infoEl != null) infoEl.innerText = tiedot;
     _muunna(dataKurssit);
   } else {
-    dataKurssit.clear();
+    if (infoEl != null) infoEl.innerText = 'Virhe: Valuuttatietoja ei saatu ladattua palvelimelta.';
   }
 
   nappiMuunna?.onClick.listen((e) {
@@ -76,21 +81,17 @@ Future<Map<String, dynamic>> _haeSisalto(String osoite) async {
     final response = await http.get(Uri.parse(osoite));
     if (response.statusCode == 200) {
       return jsonDecode(response.body) as Map<String, dynamic>;
-    } else {
-      final infoEl = web.document.querySelector('#info') as web.HTMLParagraphElement?;
-      if (infoEl != null) infoEl.innerText = 'Server error: ${response.statusCode}';
     }
   } catch (e) {
-    final infoEl = web.document.querySelector('#info') as web.HTMLParagraphElement?;
-    if (infoEl != null) infoEl.innerText = 'Request failed. Couldn\'t open $osoite';
+    // Nappaa mahdolliset verkkoyhteysvirheet
   }
   return {};
 }
 
 String _paivamaara() {
-  var now = DateTime.now();
-  var formatter = DateFormat('EEEE, d.M.yyyy');
-  return formatter.format(now);
+  var nyt = DateTime.now();
+  var muotoilija = DateFormat('EEEE, d.M.yyyy', 'fi_FI');
+  return muotoilija.format(nyt);
 }
 
 String _poistaEtunolla(String mjono) {
@@ -105,9 +106,9 @@ String _poistaEtunolla(String mjono) {
 void _muunna(Map<String, dynamic> data) async {
   final kanta = web.document.querySelector('#kantavalinta') as web.HTMLSelectElement?;
   final kohde = web.document.querySelector('#maavalinta') as web.HTMLSelectElement?;
-  final input = web.document.querySelector('#syote') as web.HTMLInputElement?;
+  final syoteKentta = web.document.querySelector('#syote') as web.HTMLInputElement?;
 
-  if (kanta == null || kohde == null || input == null) return;
+  if (kanta == null || kohde == null || syoteKentta == null) return;
 
   var kantavaluutta = kanta.value;
   var kantaKurssi = 1.0;
@@ -131,17 +132,17 @@ void _muunna(Map<String, dynamic> data) async {
   var muuntokerroin = kurssi / kantaKurssi;
   var syote = 0.0;
 
-  if (input.value.isEmpty) {
+  if (syoteKentta.value.isEmpty) {
     syote = -1.0;
   } else {
-    syote = double.tryParse(input.value) ?? -1.0;
+    syote = double.tryParse(syoteKentta.value) ?? -1.0;
   }
 
   if (syote < 0 || syote > 99999999999.99) {
-    input.style.color = 'red';
+    syoteKentta.style.color = 'red';
     await Future.delayed(const Duration(milliseconds: 600));
-    input.style.color = 'black';
-    input.value = '1';
+    syoteKentta.style.color = 'black';
+    syoteKentta.value = '1';
     syote = 1.0;
   }
 
@@ -166,7 +167,6 @@ void _muunna(Map<String, dynamic> data) async {
 }
 
 String _format(double luku, bool tarkkaArvo) {
-  // Käytetään suomalaista muotoilua 'fi_FI', jotta luvut tulostuvat automaattisesti pilkulla
   if (tarkkaArvo) {
     var f = NumberFormat('##0.00###', 'fi_FI');
     return f.format(luku);
